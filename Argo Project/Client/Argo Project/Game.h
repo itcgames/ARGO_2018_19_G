@@ -23,6 +23,7 @@ public:
 	void init(const char* title, int xpos, int ypos, int width, int height);
 
 	void handleEvents();
+	void run();
 	void update();
 	void render();
 	void clean();
@@ -31,7 +32,7 @@ public:
 	
 
 private:
-	bool m_isRunning;
 	SDL_Window *window;
+	bool m_isRunning;
 	SDL_Renderer *renderer;
 };
