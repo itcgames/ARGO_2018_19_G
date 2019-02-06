@@ -96,7 +96,7 @@ void Game::run()
 //
 void Game::update() 
 {
-
+	
 }
 
 /// <summary>
