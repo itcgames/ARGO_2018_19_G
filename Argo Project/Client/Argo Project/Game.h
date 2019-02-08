@@ -8,6 +8,8 @@
 // Time taken:
 // Known bugs:
 
+#ifndef GAME_H
+#define GAME_H
 
 #include <stdio.h>
 #include <iostream>
@@ -21,6 +23,7 @@ public:
 	~Game();
 
 	void init(const char* title, int xpos, int ypos, int width, int height);
+	void run();
 
 	void handleEvents();
 	void update();
@@ -35,3 +38,5 @@ private:
 	SDL_Window *window;
 	SDL_Renderer *renderer;
 };
+
+#endif // !GAME_H

@@ -8,13 +8,20 @@
 // Time taken:
 // Known bugs:
 
+#pragma comment(lib, "SDL2.lib")
+//#pragma comment(lib, "SDLmain.lib")
+
+#define SDL_MAIN_HANDLED
+
 #include "Game.h"
 
-Game *game = nullptr;
+//Game *game = nullptr;
 
-int main()
+int main(int argc, char* argv[])
 {
-
+	Game* game = new Game();
+	game->init("SDL", 100, 100, 800, 800);
+	game->run();
 
 	return 0;
 }

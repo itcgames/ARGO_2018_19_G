@@ -85,6 +85,18 @@ void Game::handleEvents()
 }
 
 //
+void Game::run()
+{
+	while (m_isRunning == true)
+	{
+		update();
+		render();
+
+
+	}
+}
+
+//
 void Game::update() 
 {
 
