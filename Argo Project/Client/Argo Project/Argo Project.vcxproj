@@ -141,6 +141,7 @@
     <ClInclude Include="MainMenuScene.h" />
     <ClInclude Include="MenuManager.h" />
     <ClInclude Include="OptionsScreen.h" />
+    <ClInclude Include="Scene.h" />
     <ClInclude Include="SplashScreen.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

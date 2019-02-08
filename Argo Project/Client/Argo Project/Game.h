@@ -14,6 +14,8 @@
 
 #include "SDL.h"
 
+#include "MenuManager.h"
+
 class Game
 {
 public:
