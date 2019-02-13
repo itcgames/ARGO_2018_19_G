@@ -15,13 +15,37 @@
 
 #include "Game.h"
 
-//Game *game = nullptr;
+Game *game = nullptr;
 
 int main(int argc, char* argv[])
 {
-	Game* game = new Game();
-	game->init("SDL", 100, 100, 800, 800);
-	game->run();
+	//
+	const int m_FPS = 60;
+	const int m_frameDelay = 1000 / m_FPS;
+	//
+	int m_frameStart, m_frameTime;
+
+	game = new Game();
+	game->init("ARGO SDL project", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 800, false);
+
+	//
+	while (game->running())
+	{
+		m_frameStart = SDL_GetTicks();
+
+		game->handleEvents();
+		game->run();
+
+		m_frameTime = SDL_GetTicks() - m_frameStart;
+
+		//
+		if (m_frameDelay > m_frameTime)
+		{
+			SDL_Delay(m_frameDelay - m_frameTime);
+		}
+	}
+
+	game->clean();
 
 	return 0;
 }

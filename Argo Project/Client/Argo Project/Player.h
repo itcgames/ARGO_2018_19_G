@@ -12,6 +12,7 @@
 #define PLAYER_H
 
 #include "SDL.h"
+#include "SDL_image.h"
 #include "Entity.h"
 
 #include <iostream>
@@ -19,18 +20,29 @@
 class Player
 {
 public:
-	Player();
+	Player(SDL_Renderer *renderer, int width, int height, int x, int y);
 	~Player();
 
-	void init();
+	void init(SDL_Renderer *renderer);
 	void update();
-	void render();
+	
+	void render(SDL_Renderer *renderer);
 
 
 private:
-	SDL_Rect m_postion;
+	void pollEvents();
+	void jump();
+
+	bool m_jumping;
+
+	SDL_Rect *m_position;
 	SDL_Texture* m_texture;
-	SDL_Rect m_sourcePos;
+
+	//
+	int m_width, m_height;
+	int m_x, m_y;
 };
+
+#include "Game.h"
 
 #endif // !PLAYER_H

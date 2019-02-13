@@ -15,6 +15,10 @@
 #include <iostream>
 
 #include "SDL.h"
+#include "SDL_image.h"
+
+#include "Player.h"
+
 
 class Game
 {
@@ -22,7 +26,7 @@ public:
 	Game();
 	~Game();
 
-	void init(const char* title, int xpos, int ypos, int width, int height);
+	void init(const char* title, int xpos, int ypos, int width, int height, bool fullScreen);
 	void run();
 
 	void handleEvents();
@@ -32,11 +36,17 @@ public:
 
 	bool running() { return m_isRunning; };
 	
+	static SDL_Event m_event;
 
 private:
-	bool m_isRunning;
+	int m_cnt;
+	bool m_isRunning, m_fullScreen;
 	SDL_Window *window;
+	SDL_Surface *imageSurface;
 	SDL_Renderer *renderer;
+	
+	
+	Player *m_player;
 };
 
 #endif // !GAME_H

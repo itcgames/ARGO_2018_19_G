@@ -8,14 +8,14 @@
 // Time taken:
 // Known bugs:
 
-#include "Component.h"
+#include "ECS.h"
 #include "Vector2.h"
 
 #ifndef POSITIONCOMPONENT_H
 #define POSITIONCOMPONENT_H
 
 //
-class PositionComponent : public BaseComponent<PositionComponent>
+class PositionComponent : public Component
 {
 public:
 	PositionComponent(Vector2 position) :
