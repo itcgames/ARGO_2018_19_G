@@ -57,6 +57,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height)
 		}
 
 		m_isRunning = true;
+		m_currentGamestate = GameState::Licence;
 	}
 
 	//
@@ -96,7 +97,34 @@ void Game::run()
 //
 void Game::update() 
 {
-	
+	switch (m_currentGamestate)
+	{
+		case GameState::Licence:
+		{
+			m_licenceScreen.update();
+			break;
+		}
+		case GameState::Splash:
+		{
+			m_splashScreen.update();
+			break;
+		}
+		case GameState::MainMenu:
+		{
+			m_mainMenuScreen.update();
+			break;
+		}
+		case GameState::Options:
+		{
+			m_optionsScreen.update();
+			break;
+		}
+		case GameState::Help:
+		{
+			m_helpScreen.update();
+			break;
+		}
+	}
 }
 
 /// <summary>
@@ -105,6 +133,35 @@ void Game::update()
 void Game::render() 
 {
 	SDL_RenderClear(renderer);
+
+	switch (m_currentGamestate)
+	{
+		case GameState::Licence:
+		{
+			m_licenceScreen.render(renderer);
+			break;
+		}
+		case GameState::Splash:
+		{
+			m_splashScreen.render(renderer);
+			break;
+		}
+		case GameState::MainMenu:
+		{
+			m_mainMenuScreen.render(renderer);
+			break;
+		}
+		case GameState::Options:
+		{
+			m_optionsScreen.render(renderer);
+			break;
+		}
+		case GameState::Help:
+		{
+			m_helpScreen.render(renderer);
+			break;
+		}
+	}
 
 	// Drawing occurs here
 

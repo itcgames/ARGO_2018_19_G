@@ -1,8 +1,12 @@
 #pragma once
-class MainMenuScene
+#include <SDL.h>
+class MainMenuScreen
 {
 public:
-	MainMenuScene();
-	~MainMenuScene();
+	MainMenuScreen();
+	~MainMenuScreen();
+
+	void update();
+	void render(SDL_Renderer *renderer);
 };
 

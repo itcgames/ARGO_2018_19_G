@@ -34,6 +34,13 @@ public:
 	
 
 private:
+	GameState m_currentGamestate;
+	LicenceScreen m_licenceScreen;
+	SplashScreen m_splashScreen;
+	MainMenuScreen m_mainMenuScreen;
+	OptionsScreen m_optionsScreen;
+	HelpScreen m_helpScreen;
+
 	SDL_Window *window;
 	bool m_isRunning;
 	SDL_Renderer *renderer;
