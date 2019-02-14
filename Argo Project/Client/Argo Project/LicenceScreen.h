@@ -11,6 +11,6 @@ public:
 
 private:
 	SDL_Surface *test;
-
+	//
 };
 
