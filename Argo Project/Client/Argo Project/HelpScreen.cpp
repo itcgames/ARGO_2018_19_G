@@ -2,15 +2,21 @@
 
 
 
-HelpScreen::HelpScreen()
+HelpScreen::HelpScreen(SDL_Renderer* renderer)
 {
+	initialise(renderer);
 }
 
 
 HelpScreen::~HelpScreen()
 {
 }
+ 
 
+void HelpScreen::initialise(SDL_Renderer* renderer)
+{
+
+}
 
 void HelpScreen::update()
 {

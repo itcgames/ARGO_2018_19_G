@@ -35,7 +35,7 @@ public:
 
 private:
 	GameState m_currentGamestate;
-	LicenceScreen m_licenceScreen;
+	LicenceScreen* m_licenceScreen;
 	SplashScreen m_splashScreen;
 	MainMenuScreen m_mainMenuScreen;
 	OptionsScreen m_optionsScreen;

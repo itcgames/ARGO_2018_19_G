@@ -145,6 +145,7 @@
     <ClInclude Include="OptionsScreen.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SplashScreen.h" />
+    <ClInclude Include="Vector2.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

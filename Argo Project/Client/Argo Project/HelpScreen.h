@@ -4,9 +4,10 @@
 class HelpScreen
 {
 public:
-	HelpScreen();
+	HelpScreen(SDL_Renderer* renderer);
 	~HelpScreen();
 
+	void initialise(SDL_Renderer* renderer);
 	void update();
 	void render(SDL_Renderer *renderer);
 };

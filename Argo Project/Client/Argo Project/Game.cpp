@@ -56,6 +56,8 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height)
 			std::cout << "Renderer created!" << std::endl;
 		}
 
+		m_licenceScreen = new LicenceScreen(renderer);
+
 		m_isRunning = true;
 		m_currentGamestate = GameState::Licence;
 	}
@@ -101,7 +103,7 @@ void Game::update()
 	{
 		case GameState::Licence:
 		{
-			m_licenceScreen.update();
+			m_licenceScreen->update();
 			break;
 		}
 		case GameState::Splash:
@@ -138,7 +140,7 @@ void Game::render()
 	{
 		case GameState::Licence:
 		{
-			m_licenceScreen.render(renderer);
+			m_licenceScreen->render(renderer);
 			break;
 		}
 		case GameState::Splash:

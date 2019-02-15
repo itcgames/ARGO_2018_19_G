@@ -1,11 +1,17 @@
 #include "OptionsScreen.h"
 
-OptionsScreen::OptionsScreen()
+OptionsScreen::OptionsScreen(SDL_Renderer* renderer)
 {
+	initialise(renderer);
 }
 
 
 OptionsScreen::~OptionsScreen()
+{
+
+}
+
+void OptionsScreen::initialise(SDL_Renderer* renderer)
 {
 
 }

@@ -3,9 +3,10 @@
 class SplashScreen
 {
 public:
-	SplashScreen();
+	SplashScreen(SDL_Renderer* renderer);
 	~SplashScreen();
 
+	void initialise(SDL_Renderer* renderer);
 	void update();
 	void render(SDL_Renderer *renderer);
 };

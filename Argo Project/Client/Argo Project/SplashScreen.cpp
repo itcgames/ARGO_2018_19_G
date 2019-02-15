@@ -2,13 +2,19 @@
 
 
 
-SplashScreen::SplashScreen()
+SplashScreen::SplashScreen(SDL_Renderer* renderer)
 {
+	initialise(renderer);
 }
 
 
 SplashScreen::~SplashScreen()
 {
+}
+
+void SplashScreen::initialise(SDL_Renderer* renderer)
+{
+
 }
 
 void SplashScreen::update()
