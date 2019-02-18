@@ -11,8 +11,12 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
+#include "ECS.h"
 #include "Component.h"
 
+#include <iostream>
+#include <string>
+#include <vector>
 #include <unordered_map>
 
 //
@@ -22,52 +26,28 @@ public:
 	//
 	Entity()
 	{
-		m_id = id;
-		id++;
-	}
-	//
-	~Entity()
-	{
-		if (m_id > 0)
-		{
-			for (std::unordered_map<int, Component*>::iterator itr = m_map.begin(); itr != m_map.end(); itr++)
-			{
-				try
-				{
-					if (itr->first != 23)
-						delete itr->second;
-				}
-				catch (...)
-				{
-					std::cout << "failed to delete, error: " << std::endl;
-				}
-			} // End for
-		} // End if
+		
 	}
 
 	//
-	template <class T> T* getComponent(int type)
+	template <class T> 
+	T* getComponent(int type)
 	{
-		return static_cast<T*>(m_map[type]);
+		return static_cast<T*>(m_component[type]);
 	};
 
 	//
+	template <class T> 
 	void addComponent(Component * component, int type)
 	{
-		m_map[type] = component;
-	}
-
-	//
-	static void resetID()
-	{
-		id = 1;
-	}
-
-	int m_id;
+		m_component[type] = component;
+	};
 
 private:
-	std::unordered_map<int, Component*> m_map;
-	static int id;
+	std::unordered_map<int, Component*> m_component;
+	//std::vector<Component> m_components;
+	//std::string m_componentName;
+	int m_ID;
 };
 
 #endif // !ENTITY_H

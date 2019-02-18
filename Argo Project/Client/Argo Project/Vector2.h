@@ -8,6 +8,9 @@
 // Time taken:
 // Known bugs:
 
+#ifndef VECTOR2_H
+#define VECTOR2_H
+
 #include <cmath>
 
 //
@@ -83,3 +86,5 @@ public:
 
 	float x, y;
 };
+
+#endif // !VECTOR2_H

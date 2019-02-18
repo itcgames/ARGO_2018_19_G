@@ -8,20 +8,18 @@
 // Time taken:
 // Known bugs:
 
-
-
-#include <vector>
-#include <memory>
-#include <algorithm>
-#include <bitset>
-#include <array>
-
 #ifndef ECS_H
 #define ECS_H
 
+#include "Entity.h"
+#include "Component.h"
+#include "PositionComponent.h"
+#include "RenderSystem.h"
+#include "JumpingSystem.h"
+
 
 /*class Component;
-class Entity;*/
+class Entity;
 
 using ComponentID = std::size_t;
 
@@ -47,7 +45,7 @@ using ComponentBitSet = std::bitset<m_maxComponents>;
 using ComponentArray = std::array<Component*, m_maxComponents>;
 
 //
-class Component
+/*class Component
 {
 public:
 	Entity * entity;
@@ -122,7 +120,7 @@ public:
 	template <typename T, typename... TArgs>
 	T& addComponent(TArgs&&... mArgs)
 	{
-		T* c(new T(std::forward<TArgs>(mArgs)...);
+		/*T* c(new T(std::forward<TArgs>(mArgs)...);
 		c->entity = this;
 		std::unique_ptr<Component> uniquePtr
 		{
@@ -147,7 +145,7 @@ private:
 	//
 	template<typename T> T& getComponenet() const
 	{
-		auto pointer(m_componentArray[getComponentTypeID<T>()]);
+		/*auto pointer(m_componentArray[getComponentTypeID<T>()]);
 		return *static_cast<T*>(pointer);
 	}
 };
@@ -189,13 +187,13 @@ public:
 	Entity& addEntity()
 	{
 		Entity* e = new Entity();
-		std::unique_ptr<Entity> uniquePtr{ e };
+		std::unique_ptr<Entity> uniquePtr { e };
 		m_entities.emplace_back(std::move(uniquePtr));
 		return *e;
 	}
 
 private:
 	std::vector<std::unique_ptr<Entity>> m_entities;
-};
+};*/
 
 #endif //! ECS_H

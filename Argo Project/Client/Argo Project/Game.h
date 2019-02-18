@@ -18,6 +18,7 @@
 #include "SDL_image.h"
 
 #include "Player.h"
+#include "ECS.h"
 
 
 class Game
@@ -34,19 +35,30 @@ public:
 	void render();
 	void clean();
 
+	//
+	void updateSystems();
+
 	bool running() { return m_isRunning; };
-	
-	static SDL_Event m_event;
 
 private:
 	int m_cnt;
-	bool m_isRunning, m_fullScreen;
+	bool m_isRunning, m_fullScreen, once;
 	SDL_Window *window;
 	SDL_Surface *imageSurface;
 	SDL_Renderer *renderer;
 	
-	
 	Player *m_player;
+	//
+	Entity *player;
+	//
+	std::vector<Entity> players;
+
+	//
+	PositionComponent *m_pc;
+	PositionComponent *pc;
+	//
+	JumpingSystem m_js;
+	RenderSystem m_rs;
 };
 
 #endif // !GAME_H

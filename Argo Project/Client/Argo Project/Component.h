@@ -11,18 +11,21 @@
 #ifndef COMPONENT_H
 #define COMPONENT_H
 
-#include "Event.h"
-
-#include <vector>
 #include <iostream>
+#include <vector>
+
+//#include "ECS.h"
+//#include "Entity.h"
+
+//
+//class Entity;
 
 //
 class Component
 {
 public:
+	//
 	virtual int getType() const = 0;
-
-	std::vector<Event *> m_events;
 };
 
 //
@@ -40,7 +43,6 @@ public:
 	static int type;
 	int getType() const { return T::type; }
 };
-
 static int nextType = 0;
 template <typename T> int BaseComponent<T>::type(nextType++);
 

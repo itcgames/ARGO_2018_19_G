@@ -10,15 +10,13 @@
 
 #include "Game.h"
 
-SDL_Event Game::m_event;
-
 /// <summary>
 /// 
 /// </summary>
 Game::Game()
 {
 	m_cnt = 0;
-	//m_player(m_manager.addEntity());
+	once = false;
 }
 
 /// <summary>
@@ -74,11 +72,35 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 		m_isRunning = false;
 	}
 
+	if (once == false)
+	{
+		//
+		m_pc = &PositionComponent(Vector2(50, 100), 1);
 
+		//
+		//player = Entity();
+		//
+		//player.addComponent(m_pc);
 
-	m_player = new Player(renderer, 100, 100, 50, 100);
+		//
+		//m_rs.addEntity(player);
 
-	
+		player = new Entity();
+
+		player->addComponent<PositionComponent>(m_pc, 1);
+
+		pc = player->getComponent<PositionComponent>(1);
+
+		players.push_back(*player);
+
+		m_js.addEntity(player);
+
+		once = true;
+	}
+
+	std::cout << pc->getPosition().x << std::endl;
+	std::cout << pc->getPosition().y << std::endl;
+
 }
 
 /// <summary>
@@ -106,45 +128,26 @@ void Game::run()
 	update();
 	render();
 
-	//
-	/*if (window == NULL)
-	{
-		std::cout << "Window Creation Error: " << SDL_GetError() << std::endl;
-	}
-	//
-	else
-	{
-
-		// Window Created
-			windowSurface = SDL_GetWindowSurface(window);
-			imageSurface = SDL_LoadBMP("Assets/Block.bmp");
-
-			//
-			if (imageSurface == NULL)
-			{
-				std::cout << "Image loading Error: " << SDL_GetError() << std::endl;
-			}
-			//
-			else 
-			{
-				SDL_BlitSurface(imageSurface, NULL, windowSurface, m_rect);
-				SDL_UpdateWindowSurface(window);
-				SDL_Delay(2000);
-			}
-
-	}	*/
+	std::cout << pc->getPosition().x << std::endl;
+q	std::cout << pc->getPosition().y << std::endl;
 }
 
 //
 void Game::update() 
 {
-	m_player->update();
+	updateSystems();
 
-	m_cnt++;
-	std::cout << m_cnt << std::endl;
+	/*m_cnt++;
+	std::cout << m_cnt << std::endl;*/
 }
 
-
+/// <summary>
+/// 
+/// </summary>
+void Game::updateSystems()
+{
+	m_js.update();
+}
 
 /// <summary>
 /// 
@@ -154,7 +157,8 @@ void Game::render()
 	SDL_RenderClear(renderer);
 
 	// Drawing occurs here
-	m_player->render(renderer);
+
+	m_rs.render(renderer);
 	//
 
 	SDL_RenderPresent(renderer);
@@ -166,11 +170,9 @@ void Game::render()
 void Game::clean()
 {
 	//SDL_FreeSurface(imageSurface);
-	//imageSurface = nullptr;
 	SDL_DestroyWindow(window);
 	SDL_DestroyRenderer(renderer);
-	//window = nullptr;
-	//windowSurface = nullptr;
 	SDL_Quit();
 	std::cout << "Game cleaned!" << std::endl;
 }
+

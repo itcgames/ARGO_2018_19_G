@@ -130,37 +130,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ActionComponent.h" />
     <ClInclude Include="BaseSystem.h" />
-    <ClInclude Include="CollisionComponent.h" />
-    <ClInclude Include="CollisionSystem.h" />
     <ClInclude Include="Component.h" />
-    <ClInclude Include="Components.h" />
-    <ClInclude Include="ControlComponent.h" />
-    <ClInclude Include="ControlSystem.h" />
     <ClInclude Include="ECS.h" />
     <ClInclude Include="Entity.h" />
-    <ClInclude Include="Event.h" />
-    <ClInclude Include="EventHandlerComponent.h" />
-    <ClInclude Include="EventHandlerSystem.h" />
-    <ClInclude Include="EventListenerComponent.h" />
-    <ClInclude Include="EventListenerSystem.h" />
     <ClInclude Include="Game.h" />
-    <ClInclude Include="HealthComponent.h" />
-    <ClInclude Include="Identifiers.h" />
-    <ClInclude Include="InputHandler.h" />
-    <ClInclude Include="JumpingComponent.h" />
+    <ClInclude Include="JumpingSystem.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="PlayerAIComponent.h" />
     <ClInclude Include="PositionComponent.h" />
-    <ClInclude Include="RunningComponent.h" />
-    <ClInclude Include="SpriteComponent.h" />
+    <ClInclude Include="RenderSystem.h" />
     <ClInclude Include="Vector2.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

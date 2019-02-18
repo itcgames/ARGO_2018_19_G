@@ -47,7 +47,7 @@ void Player::init(SDL_Renderer *renderer)
 void Player::update()
 {
 	
-	if (Game::m_event.type == SDL_KEYDOWN)
+	/*if (Game::m_event.type == SDL_KEYDOWN)
 	{
 		switch (Game::m_event.key.keysym.sym)
 		{
@@ -71,13 +71,13 @@ void Player::update()
 		}
 	}
 
-	pollEvents();
+	pollEvents();*/
 }
 
 //
 void Player::pollEvents()
 {
-	SDL_Event m_event;
+	/*SDL_Event m_event;
 
 	if (SDL_PollEvent(&m_event))
 	{
@@ -96,7 +96,7 @@ void Player::pollEvents()
 				break;
 			}
 		}
-	}
+	}*/
 }
 
 //

@@ -8,23 +8,19 @@
 // Time taken:
 // Known bugs:
 
-#include "ECS.h"
+#include "Component.h"
 #include "Vector2.h"
 
 #ifndef POSITIONCOMPONENT_H
 #define POSITIONCOMPONENT_H
 
 //
-class PositionComponent : public Component
+class PositionComponent : public BaseComponent<PositionComponent>
 {
 public:
-	PositionComponent(Vector2 position) :
+	PositionComponent(Vector2 position, int entityID) :
+		BaseComponent<PositionComponent>(entityID),
 		m_position(position)
-	{
-
-	}
-
-	~PositionComponent()
 	{
 
 	}
@@ -35,7 +31,7 @@ public:
 		return m_position;
 	}
 	//
-	void setHealth(Vector2 position)
+	void setPosition(Vector2 position)
 	{
 		this->m_position = position;
 	}
