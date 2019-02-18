@@ -26,8 +26,16 @@ void LicenceScreen::initialise(SDL_Renderer* renderer)
 	m_position->h = 1080;
 }
 
-void LicenceScreen::update()
+void LicenceScreen::update(GameState *gameState)
 {
+	while (SDL_PollEvent(&m_event))
+	{
+		switch (m_event.type)
+		{
+		case SDL_KEYDOWN:
+			*gameState = GameState::Splash;
+		}
+	}
 	std::cout << "updating licence" << std::endl;
 }
 

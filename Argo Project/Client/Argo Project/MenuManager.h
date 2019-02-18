@@ -1,11 +1,8 @@
 #pragma once
-#include "LicenceScreen.h"
-#include "SplashScreen.h"
-#include "MainMenuScene.h"
-#include "OptionsScreen.h"
-#include "CreditsScreen.h"
-#include "HelpScreen.h"
-#include <map>
+
+#ifndef MENUMANAGER
+#define MENUMANAGER
+
 
 enum class GameState
 {
@@ -27,4 +24,6 @@ public:
 private:
 
 };
+
+#endif // !MENUMANAGER
 

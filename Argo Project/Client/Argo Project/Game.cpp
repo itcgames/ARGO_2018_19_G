@@ -57,6 +57,11 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height)
 		}
 
 		m_licenceScreen = new LicenceScreen(renderer);
+		m_splashScreen = new SplashScreen(renderer);
+		m_mainMenuScreen = new MainMenuScreen(renderer);
+		m_optionsScreen = new OptionsScreen(renderer);
+		m_helpScreen = new HelpScreen(renderer);
+
 
 		m_isRunning = true;
 		m_currentGamestate = GameState::Licence;
@@ -103,27 +108,27 @@ void Game::update()
 	{
 		case GameState::Licence:
 		{
-			m_licenceScreen->update();
+			m_licenceScreen->update(&m_currentGamestate);
 			break;
 		}
 		case GameState::Splash:
 		{
-			m_splashScreen.update();
+			m_splashScreen->update(&m_currentGamestate);
 			break;
 		}
 		case GameState::MainMenu:
 		{
-			m_mainMenuScreen.update();
+			m_mainMenuScreen->update(&m_currentGamestate);
 			break;
 		}
 		case GameState::Options:
 		{
-			m_optionsScreen.update();
+			m_optionsScreen->update(&m_currentGamestate);
 			break;
 		}
 		case GameState::Help:
 		{
-			m_helpScreen.update();
+			m_helpScreen->update(&m_currentGamestate);
 			break;
 		}
 	}
@@ -145,22 +150,22 @@ void Game::render()
 		}
 		case GameState::Splash:
 		{
-			m_splashScreen.render(renderer);
+			m_splashScreen->render(renderer);
 			break;
 		}
 		case GameState::MainMenu:
 		{
-			m_mainMenuScreen.render(renderer);
+			m_mainMenuScreen->render(renderer);
 			break;
 		}
 		case GameState::Options:
 		{
-			m_optionsScreen.render(renderer);
+			m_optionsScreen->render(renderer);
 			break;
 		}
 		case GameState::Help:
 		{
-			m_helpScreen.render(renderer);
+			m_helpScreen->render(renderer);
 			break;
 		}
 	}
