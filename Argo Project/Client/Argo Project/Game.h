@@ -63,8 +63,7 @@ private:
 	Entity *player;
 
 	//
-	PositionComponent *m_pc;
-	PositionComponent *pc;
+	PositionComponent* m_pc;
 	//
 	JumpingSystem m_js;
 	RenderSystem m_rs;

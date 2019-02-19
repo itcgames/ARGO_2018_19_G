@@ -30,8 +30,6 @@ public:
 
 	void pollEvents(SDL_Event m_event);
 
-
-
 private:
 
 	void jump();

@@ -82,20 +82,20 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	}
 
 	//
-	m_pc = &PositionComponent(Vector2(50, 100), 1);
+	m_pc = new PositionComponent(Vector2(50, 100), 1);
 
 	player = new Entity();
 
 	player->addComponent<PositionComponent>(m_pc, 1);
 
-	pc = player->getComponent<PositionComponent>(1);
+	m_pc = player->getComponent<PositionComponent>(1);
 
 	m_js.addEntity(player);
 
 	m_player = new Player(renderer, 100, 100, 20, 600);
 
-	std::cout << pc->getPosition().x << std::endl;
-	std::cout << pc->getPosition().y << std::endl;
+	std::cout << m_pc->getPosition().x << std::endl;
+	std::cout << m_pc->getPosition().y << std::endl;
 }
 
 /// <summary>
@@ -135,8 +135,8 @@ void Game::run()
 		update(m_deltaTime);
 		render();
 
-		/*std::cout << pc->getPosition().x << std::endl;
-		std::cout << pc->getPosition().y << std::endl;*/
+		/*std::cout << m_pc->getPosition().x << std::endl;
+		std::cout << m_pc->getPosition().y << std::endl;*/
 
 		m_frameTime = SDL_GetTicks() - m_frameStart;
 
