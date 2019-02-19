@@ -44,7 +44,7 @@ void Player::init(SDL_Renderer *renderer)
 }
 
 //
-void Player::update()
+void Player::update(float deltaTime)
 {
 	
 	/*if (Game::m_event.type == SDL_KEYDOWN)
@@ -71,13 +71,13 @@ void Player::update()
 		}
 	}
 
-	pollEvents();*/
+	pollEvents();*/ 
 }
 
 //
-void Player::pollEvents()
+void Player::pollEvents(SDL_Event m_event)
 {
-	/*SDL_Event m_event;
+
 
 	if (SDL_PollEvent(&m_event))
 	{
@@ -86,17 +86,17 @@ void Player::pollEvents()
 			switch (m_event.key.keysym.sym)
 			{
 			case SDLK_UP:
-
+				std::cout << "Up" << std::endl;
 				break;
 			case SDLK_w:
-
+				std::cout << "W" << std::endl;
 				break;
 			case SDLK_SPACE:
-
+				std::cout << "Space" << std::endl;
 				break;
 			}
 		}
-	}*/
+	}
 }
 
 //

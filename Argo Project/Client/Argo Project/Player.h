@@ -24,13 +24,16 @@ public:
 	~Player();
 
 	void init(SDL_Renderer *renderer);
-	void update();
+	void update(float deltaTime);
 	
 	void render(SDL_Renderer *renderer);
 
+	void pollEvents(SDL_Event m_event);
+
+	
 
 private:
-	void pollEvents();
+	
 	void jump();
 
 	bool m_jumping;

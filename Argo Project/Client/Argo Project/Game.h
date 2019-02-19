@@ -31,7 +31,7 @@ public:
 	void run();
 
 	void handleEvents();
-	void update();
+	void update(float deltaTime);
 	void render();
 	void clean();
 
@@ -42,6 +42,8 @@ public:
 
 private:
 	int m_cnt;
+	float m_deltaTime;
+	Uint64 m_now, m_last;
 	bool m_isRunning, m_fullScreen, once;
 	SDL_Window *window;
 	SDL_Surface *imageSurface;

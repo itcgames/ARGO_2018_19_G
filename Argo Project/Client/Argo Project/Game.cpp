@@ -15,6 +15,11 @@
 /// </summary>
 Game::Game()
 {
+	//
+	m_deltaTime = 0;
+	m_now = SDL_GetPerformanceCounter();
+	m_last = 0;
+	//
 	m_cnt = 0;
 	once = false;
 }
@@ -98,6 +103,8 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 		once = true;
 	}
 
+	m_player = new Player(renderer, 100, 100, 20, 600);
+
 	std::cout << pc->getPosition().x << std::endl;
 	std::cout << pc->getPosition().y << std::endl;
 
@@ -116,6 +123,12 @@ void Game::handleEvents()
 	case SDL_QUIT:
 		m_isRunning = false;
 		break;
+	case SDL_KEYDOWN:
+		std::cout << "Key up" << std::endl;
+		break;
+	case SDL_KEYUP:
+		std::cout << "Key down" << std::endl;
+		break;
 
 	default:
 		break;
@@ -125,17 +138,26 @@ void Game::handleEvents()
 //
 void Game::run()
 {
-	update();
+	//
+	m_last = m_now;
+	m_now = SDL_GetPerformanceCounter();
+	//
+	m_deltaTime = (float)((m_now - m_last) * 1000 / (float)SDL_GetPerformanceFrequency());
+
+	//
+	update(m_deltaTime);
 	render();
 
 	std::cout << pc->getPosition().x << std::endl;
-q	std::cout << pc->getPosition().y << std::endl;
+	std::cout << pc->getPosition().y << std::endl;
 }
 
 //
-void Game::update() 
+void Game::update(float deltaTime) 
 {
 	updateSystems();
+
+	m_player->update(deltaTime);
 
 	/*m_cnt++;
 	std::cout << m_cnt << std::endl;*/
@@ -146,7 +168,7 @@ void Game::update()
 /// </summary>
 void Game::updateSystems()
 {
-	m_js.update();
+	//m_js.update();
 }
 
 /// <summary>
@@ -157,8 +179,9 @@ void Game::render()
 	SDL_RenderClear(renderer);
 
 	// Drawing occurs here
+	m_player->render(renderer);
 
-	m_rs.render(renderer);
+	//m_rs.render(renderer);
 	//
 
 	SDL_RenderPresent(renderer);
