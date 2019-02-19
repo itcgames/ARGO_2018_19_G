@@ -19,7 +19,9 @@
 int main()
 {
 	Game* game = new Game();
-	game->init("SDL", 100,100, 1920, 1080);
+	game->init("SDL", 100,100, 1920, 1080, false);
+
+
 	game->run();
 	
 	return 0;

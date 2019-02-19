@@ -8,6 +8,8 @@
 // Time taken:
 // Known bugs:
 
+#ifndef GAME_H
+#define GAME_H
 
 #include <stdio.h>
 #include <iostream>
@@ -21,17 +23,20 @@
 #include "OptionsScreen.h"
 #include "HelpScreen.h"
 
+#include "ECS.h"
+#include "Player.h"
+
 class Game
 {
 public:
 	Game();
 	~Game();
 
-	void init(const char* title, int xpos, int ypos, int width, int height);
+	void init(const char* title, int xpos, int ypos, int width, int height, bool fullScreen);
 
 	void handleEvents();
 	void run();
-	void update();
+	void update(float deltaTime);
 	void render();
 	void clean();
 
@@ -49,4 +54,20 @@ private:
 	SDL_Window *window;
 	bool m_isRunning;
 	SDL_Renderer *renderer;
+
+	float m_deltaTime;
+	Uint64 m_now, m_last;
+
+	Player *m_player;
+	//
+	Entity *player;
+
+	//
+	PositionComponent *m_pc;
+	PositionComponent *pc;
+	//
+	JumpingSystem m_js;
+	RenderSystem m_rs;
 };
+
+#endif // !GAME_H

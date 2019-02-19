@@ -15,7 +15,10 @@
 /// </summary>
 Game::Game()
 {
-
+	//
+	m_deltaTime = 0;
+	m_now = SDL_GetPerformanceCounter();
+	m_last = 0;
 }
 
 /// <summary>
@@ -34,9 +37,14 @@ Game::~Game()
 /// <param name="ypos"></param>
 /// <param name="width"></param>
 /// <param name="height"></param>
-void Game::init(const char* title, int xpos, int ypos, int width, int height)
+void Game::init(const char* title, int xpos, int ypos, int width, int height, bool fullScreen)
 {
 	int flags = 0;
+
+	if (fullScreen == true)
+	{
+		flags = SDL_WINDOW_FULLSCREEN;
+	}
 
 	//
 	if (SDL_Init(SDL_INIT_EVERYTHING) == 0)
@@ -72,6 +80,22 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height)
 	{
 		m_isRunning = false;
 	}
+
+	//
+	m_pc = &PositionComponent(Vector2(50, 100), 1);
+
+	player = new Entity();
+
+	player->addComponent<PositionComponent>(m_pc, 1);
+
+	pc = player->getComponent<PositionComponent>(1);
+
+	m_js.addEntity(player);
+
+	m_player = new Player(renderer, 100, 100, 20, 600);
+
+	std::cout << pc->getPosition().x << std::endl;
+	std::cout << pc->getPosition().y << std::endl;
 }
 
 /// <summary>
@@ -94,15 +118,38 @@ void Game::handleEvents()
 
 void Game::run()
 {
+	//
+	const int m_FPS = 60;
+	const int m_frameDelay = 1000 / m_FPS;
+	//
+	int m_frameStart = 0, m_frameTime = 0;
+
 	while (m_isRunning)
 	{
-		update();
+		//
+		m_last = m_now;
+		m_now = SDL_GetPerformanceCounter();
+		//
+		m_deltaTime = (float)((m_now - m_last) * 1000 / (float)SDL_GetPerformanceFrequency());
+
+		update(m_deltaTime);
 		render();
+
+		/*std::cout << pc->getPosition().x << std::endl;
+		std::cout << pc->getPosition().y << std::endl;*/
+
+		m_frameTime = SDL_GetTicks() - m_frameStart;
+
+		//
+		if (m_frameDelay > m_frameTime)
+		{
+			SDL_Delay(m_frameDelay - m_frameTime);
+		}
 	}
 }
 
 //
-void Game::update() 
+void Game::update(float deltaTime)
 {
 	switch (m_currentGamestate)
 	{
@@ -141,6 +188,8 @@ void Game::render()
 {
 	SDL_RenderClear(renderer);
 
+	// Drawing occurs here
+
 	switch (m_currentGamestate)
 	{
 		case GameState::Licence:
@@ -169,8 +218,6 @@ void Game::render()
 			break;
 		}
 	}
-
-	// Drawing occurs here
 
 	//
 

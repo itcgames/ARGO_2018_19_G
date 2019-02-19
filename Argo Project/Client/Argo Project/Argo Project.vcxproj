@@ -133,16 +133,25 @@
     <ClCompile Include="MainMenuScene.cpp" />
     <ClCompile Include="MenuManager.cpp" />
     <ClCompile Include="OptionsScreen.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="SplashScreen.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BaseSystem.h" />
+    <ClInclude Include="Component.h" />
     <ClInclude Include="CreditsScreen.h" />
+    <ClInclude Include="ECS.h" />
+    <ClInclude Include="Entity.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="HelpScreen.h" />
+    <ClInclude Include="JumpingSystem.h" />
     <ClInclude Include="LicenceScreen.h" />
     <ClInclude Include="MainMenuScene.h" />
     <ClInclude Include="MenuManager.h" />
     <ClInclude Include="OptionsScreen.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="PositionComponent.h" />
+    <ClInclude Include="RenderSystem.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SplashScreen.h" />
     <ClInclude Include="Vector2.h" />
