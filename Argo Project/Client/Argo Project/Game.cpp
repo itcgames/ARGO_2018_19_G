@@ -56,7 +56,15 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height)
 			std::cout << "Renderer created!" << std::endl;
 		}
 
+		m_licenceScreen = new LicenceScreen(renderer);
+		m_splashScreen = new SplashScreen(renderer);
+		m_mainMenuScreen = new MainMenuScreen(renderer);
+		m_optionsScreen = new OptionsScreen(renderer);
+		m_helpScreen = new HelpScreen(renderer);
+
+
 		m_isRunning = true;
+		m_currentGamestate = GameState::Licence;
 	}
 
 	//
@@ -84,10 +92,46 @@ void Game::handleEvents()
 	}
 }
 
+void Game::run()
+{
+	while (m_isRunning)
+	{
+		update();
+		render();
+	}
+}
+
 //
 void Game::update() 
 {
-
+	switch (m_currentGamestate)
+	{
+		case GameState::Licence:
+		{
+			m_licenceScreen->update(&m_currentGamestate);
+			break;
+		}
+		case GameState::Splash:
+		{
+			m_splashScreen->update(&m_currentGamestate);
+			break;
+		}
+		case GameState::MainMenu:
+		{
+			m_mainMenuScreen->update(&m_currentGamestate);
+			break;
+		}
+		case GameState::Options:
+		{
+			m_optionsScreen->update(&m_currentGamestate);
+			break;
+		}
+		case GameState::Help:
+		{
+			m_helpScreen->update(&m_currentGamestate);
+			break;
+		}
+	}
 }
 
 /// <summary>
@@ -96,6 +140,35 @@ void Game::update()
 void Game::render() 
 {
 	SDL_RenderClear(renderer);
+
+	switch (m_currentGamestate)
+	{
+		case GameState::Licence:
+		{
+			m_licenceScreen->render(renderer);
+			break;
+		}
+		case GameState::Splash:
+		{
+			m_splashScreen->render(renderer);
+			break;
+		}
+		case GameState::MainMenu:
+		{
+			m_mainMenuScreen->render(renderer);
+			break;
+		}
+		case GameState::Options:
+		{
+			m_optionsScreen->render(renderer);
+			break;
+		}
+		case GameState::Help:
+		{
+			m_helpScreen->render(renderer);
+			break;
+		}
+	}
 
 	// Drawing occurs here
 
