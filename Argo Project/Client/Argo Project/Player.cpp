@@ -36,7 +36,6 @@ void Player::init(SDL_Renderer *renderer)
 	m_position = new SDL_Rect();
 
 
-
 	m_position->x = m_x;
 	m_position->y = m_y;
 	m_position->w = m_width;

@@ -69,6 +69,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 		m_mainMenuScreen = new MainMenuScreen(renderer);
 		m_optionsScreen = new OptionsScreen(renderer);
 		m_helpScreen = new HelpScreen(renderer);
+		m_playScreen = new PlayScreen(renderer);
 
 
 		m_isRunning = true;
@@ -82,7 +83,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	}
 
 	//
-	m_pc = new PositionComponent(Vector2(50, 100), 1);
+	/*m_pc = new PositionComponent(Vector2(50, 100), 1);
 
 	player = new Entity();
 
@@ -90,12 +91,8 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 
 	m_pc = player->getComponent<PositionComponent>(1);
 
-	m_js.addEntity(player);
+	m_js.addEntity(player);*/
 
-	m_player = new Player(renderer, 100, 100, 20, 600);
-
-	std::cout << m_pc->getPosition().x << std::endl;
-	std::cout << m_pc->getPosition().y << std::endl;
 }
 
 /// <summary>
@@ -135,9 +132,6 @@ void Game::run()
 		update(m_deltaTime);
 		render();
 
-		/*std::cout << m_pc->getPosition().x << std::endl;
-		std::cout << m_pc->getPosition().y << std::endl;*/
-
 		m_frameTime = SDL_GetTicks() - m_frameStart;
 
 		//
@@ -166,6 +160,11 @@ void Game::update(float deltaTime)
 		case GameState::MainMenu:
 		{
 			m_mainMenuScreen->update(&m_currentGamestate);
+			break;
+		}
+		case GameState::Play:
+		{
+			m_playScreen->update(&m_currentGamestate);
 			break;
 		}
 		case GameState::Options:
@@ -207,6 +206,11 @@ void Game::render()
 			m_mainMenuScreen->render(renderer);
 			break;
 		}
+		case GameState::Play:
+		{
+			m_playScreen->render(renderer);
+			break;
+		}
 		case GameState::Options:
 		{
 			m_optionsScreen->render(renderer);
@@ -217,6 +221,7 @@ void Game::render()
 			m_helpScreen->render(renderer);
 			break;
 		}
+		
 	}
 
 	//

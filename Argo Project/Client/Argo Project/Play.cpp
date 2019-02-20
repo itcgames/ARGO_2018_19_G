@@ -14,30 +14,18 @@ PlayScreen::~PlayScreen()
 
 void PlayScreen::initialise(SDL_Renderer* renderer)
 {
-	/*SDL_Surface* surface = IMG_Load("Resources/SplashPlaceholder.png");
-	m_texture = SDL_CreateTextureFromSurface(renderer, surface);
-	SDL_FreeSurface(surface);
+	m_player = new Entity();
 
-	m_position = new SDL_Rect();
+	m_pc = new PositionComponent(Vector2(50, 100), 1);
 
-	m_position->x = 0;
-	m_position->y = 0;
-	m_position->w = 1920;
-	m_position->h = 1080;*/
+	m_player->addComponent<PositionComponent>(m_pc, 1);
+
+	m_js.addEntity(m_player);
 }
 
 void PlayScreen::update(GameState* gameState)
 {
-	while (SDL_PollEvent(&m_event))
-	{
-		switch (m_event.type)
-		{
-		case SDL_KEYDOWN:
-			*gameState = GameState::MainMenu;
-		}
-	}
-
-	std::cout << "updating splash" << std::endl;
+	m_js.update();
 }
 
 void PlayScreen::render(SDL_Renderer *renderer)
