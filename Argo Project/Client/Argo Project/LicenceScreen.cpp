@@ -14,7 +14,7 @@ LicenceScreen::~LicenceScreen()
 
 void LicenceScreen::initialise(SDL_Renderer* renderer)
 {
-	SDL_Surface* surface = IMG_Load("Resources/LicencePlaceholder.png");
+	SDL_Surface* surface = IMG_Load("ASSETS/licence screen.png");
 	m_texture = SDL_CreateTextureFromSurface(renderer, surface);
 	SDL_FreeSurface(surface);
 

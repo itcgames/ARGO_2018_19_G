@@ -42,7 +42,17 @@ public:
 	void render(SDL_Renderer *renderer)
 	{
 		std::cout << "Render" << std::endl;
+
+		for (auto *e : m_entities)
+		{
+			SDL_RenderCopy(renderer, e->getComponent<SpriteComponent>(1)->getTexture(), NULL, e->getComponent<SpriteComponent>(1)->getRect());
+		}
 		//SDL_RenderCopy(renderer, m_texture, NULL, m_position);
+	}
+
+	void renderImage(SDL_Renderer* renderer, SpriteComponent* spriteComponent)
+	{
+		SDL_RenderCopy(renderer, spriteComponent->getTexture(), NULL, spriteComponent->getRect());
 	}
 
 private:

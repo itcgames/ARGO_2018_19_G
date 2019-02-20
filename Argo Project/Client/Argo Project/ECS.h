@@ -14,6 +14,7 @@
 #include "Entity.h"
 #include "Component.h"
 #include "PositionComponent.h"
+#include "SpriteComponent.h" 
 #include "RenderSystem.h"
 #include "JumpingSystem.h"
 
