@@ -1,3 +1,3 @@
 ﻿  Game.cpp
-c:\users\gameuser\desktop\argo_2018_19_g\argo_2018_19_g\argo project\client\argo project\jumpingsystem.h(40): warning C4018: '<': signed/unsigned mismatch
-  Argo Project.vcxproj -> C:\Users\gameuser\Desktop\ARGO_2018_19_G\ARGO_2018_19_G\Argo Project\Client\Debug\Argo Project.exe
+c:\users\gameuser\documents\college stuff\argo project\argo_2018_19_g\argo_2018_19_g\argo project\client\argo project\jumpingsystem.h(40): warning C4018: '<': signed/unsigned mismatch
+  Argo Project.vcxproj -> C:\Users\gameuser\Documents\college stuff\ARGO Project\ARGO_2018_19_G\ARGO_2018_19_G\Argo Project\Client\Debug\Argo Project.exe

@@ -22,9 +22,9 @@
 #include "MainMenuScene.h"
 #include "OptionsScreen.h"
 #include "HelpScreen.h"
+#include "Play.h"
 
 #include "ECS.h"
-#include "Player.h"
 
 class Game
 {
@@ -50,6 +50,7 @@ private:
 	MainMenuScreen* m_mainMenuScreen;
 	OptionsScreen* m_optionsScreen;
 	HelpScreen* m_helpScreen;
+	PlayScreen* m_playScreen;
 
 	SDL_Window *window;
 	bool m_isRunning;
@@ -57,16 +58,6 @@ private:
 
 	float m_deltaTime;
 	Uint64 m_now, m_last;
-
-	Player *m_player;
-	//
-	Entity *player;
-
-	//
-	PositionComponent* m_pc;
-	//
-	JumpingSystem m_js;
-	RenderSystem m_rs;
 };
 
 #endif // !GAME_H

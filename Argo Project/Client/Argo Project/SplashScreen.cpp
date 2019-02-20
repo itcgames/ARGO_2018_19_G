@@ -14,7 +14,7 @@ SplashScreen::~SplashScreen()
 
 void SplashScreen::initialise(SDL_Renderer* renderer)
 {
-	SDL_Surface* surface = IMG_Load("Resources/SplashPlaceholder.png");
+	SDL_Surface* surface = IMG_Load("ASSETS/splashScreen2.png");
 	m_texture = SDL_CreateTextureFromSurface(renderer, surface);
 	SDL_FreeSurface(surface);
 

@@ -27,7 +27,7 @@ void MainMenuScreen::update(GameState* gameState)
 
 			if (SDL_PointInRect(mouse, m_playPos))
 			{
-			//	*gameState = GameState::Options;
+				*gameState = GameState::Play;
 			}
 
 			if (SDL_PointInRect(mouse, m_optionsPos))

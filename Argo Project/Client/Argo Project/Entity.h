@@ -45,8 +45,6 @@ public:
 
 private:
 	std::unordered_map<int, Component*> m_component;
-	//std::vector<Component> m_components;
-	//std::string m_componentName;
 	int m_ID;
 };
 
