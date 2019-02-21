@@ -21,6 +21,8 @@ void PlayScreen::initialise(SDL_Renderer* renderer)
 
 	m_player->addComponent<PositionComponent>(m_pc, 1);
 	m_player->addComponent<SpriteComponent>(m_sc, 1);
+
+	m_js.addEntity(m_player);
 }
 
 void PlayScreen::update(GameState* gameState)
