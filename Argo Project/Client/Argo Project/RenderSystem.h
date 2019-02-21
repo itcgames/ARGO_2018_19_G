@@ -43,17 +43,14 @@ public:
 	{
 		std::cout << "Render" << std::endl;
 
-		for (auto *e : m_entities)
+		for (int i = 0; i < m_entities.size(); i++)
 		{
-			SDL_RenderCopy(renderer, e->getComponent<SpriteComponent>(1)->getTexture(), NULL, e->getComponent<SpriteComponent>(1)->getRect());
+			SpriteComponent* sprite = m_entities[i]->getComponent<SpriteComponent>(2);
+
+			SDL_RenderCopy(renderer, sprite->getTexture(), NULL, sprite->getRect());
 		}
-		//SDL_RenderCopy(renderer, m_texture, NULL, m_position);
 	}
 
-	void renderImage(SDL_Renderer* renderer, SpriteComponent* spriteComponent)
-	{
-		SDL_RenderCopy(renderer, spriteComponent->getTexture(), NULL, spriteComponent->getRect());
-	}
 
 private:
 	//

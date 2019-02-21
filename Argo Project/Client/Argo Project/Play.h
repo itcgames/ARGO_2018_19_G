@@ -14,11 +14,19 @@ public:
 	void update(GameState *gameState);
 	void render(SDL_Renderer *renderer);
 	void initSprites(SDL_Renderer *renderer);
+	void createObstacle();
 private:
-	Entity *m_player;
+	Entity* m_player;
+	Entity* m_obstacle;
+
 	SDL_Event m_event;
+
 	SDL_Texture* m_backgroundTxt;
 	SDL_Texture* m_playerTxt;
+	SDL_Texture* m_obstacleTxt;
+	SDL_Texture* m_platformTxt;
+
+	SDL_Rect m_obstacleRect;
 	SDL_Rect* m_backgroundPos;
 	SDL_Rect* m_playerRect;
 
@@ -29,6 +37,6 @@ private:
 	SpriteComponent* m_sc;
 	//
 	JumpingSystem m_js;
-	RenderSystem m_rs;
+	RenderSystem* m_rs;
 
 };
