@@ -41,10 +41,9 @@ public:
 	//
 	void render(SDL_Renderer *renderer)
 	{
-		std::cout << "Render" << std::endl;
-
 		for (int i = 0; i < m_entities.size(); i++)
 		{
+
 			SpriteComponent* sprite = m_entities[i]->getComponent<SpriteComponent>(2);
 
 			SDL_RenderCopy(renderer, sprite->getTexture(), NULL, sprite->getRect());
@@ -54,11 +53,8 @@ public:
 
 private:
 	//
-	SDL_Rect * m_position;
 	SDL_Texture* m_texture;
 	//
-	int m_width, m_height;
-	int m_x, m_y;
 };
 
 #endif // !RENDERSYSTEM_H

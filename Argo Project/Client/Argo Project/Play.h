@@ -14,10 +14,10 @@ public:
 	void update(GameState *gameState);
 	void render(SDL_Renderer *renderer);
 	void initSprites(SDL_Renderer *renderer);
-	void createObstacle();
+	void createObstacle(SDL_Rect* rect);
 private:
 	Entity* m_player;
-	Entity* m_obstacle;
+	//Entity* m_obstacle;
 
 	SDL_Event m_event;
 
@@ -25,12 +25,19 @@ private:
 	SDL_Texture* m_playerTxt;
 	SDL_Texture* m_obstacleTxt;
 	SDL_Texture* m_platformTxt;
+	SDL_Texture* m_wiresTxt;
+	SDL_Texture* m_thumbtacTxt;
+	SDL_Texture* m_mouseTxt;
+	SDL_Texture* m_splintersTxt;
 
 	SDL_Rect m_obstacleRect;
 	SDL_Rect* m_backgroundPos;
 	SDL_Rect* m_playerRect;
 
-	Entity *player;
+	std::vector<SDL_Texture*> m_obstacleTextures;
+	std::vector<Entity*> m_obstacles;
+
+	//Entity *player;
 
 	//
 	PositionComponent* m_pc;
