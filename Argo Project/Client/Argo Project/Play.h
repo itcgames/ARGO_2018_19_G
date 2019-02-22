@@ -11,7 +11,7 @@ public:
 	~PlayScreen();
 
 	void initialise(SDL_Renderer* renderer);
-	void update(GameState *gameState);
+	void update(GameState *gameState, float deltaTime);
 	void render(SDL_Renderer *renderer);
 	void initSprites(SDL_Renderer *renderer);
 private:

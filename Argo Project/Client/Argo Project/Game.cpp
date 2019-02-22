@@ -16,8 +16,8 @@
 Game::Game()
 {
 	//
-	m_deltaTime = 0;
-	m_now = SDL_GetPerformanceCounter();
+	m_deltaTime = 0.0;
+	m_now = SDL_GetTicks();
 	m_last = 0;
 }
 
@@ -103,19 +103,22 @@ void Game::handleEvents()
 void Game::run()
 {
 	//
-	const int m_FPS = 60;
+	const int m_FPS = 30;
 	const int m_frameDelay = 1000 / m_FPS;
 	//
 	int m_frameStart = 0, m_frameTime = 0;
 
 	while (m_isRunning)
 	{
-		//
-		m_last = m_now;
-		m_now = SDL_GetPerformanceCounter();
-		//
-		m_deltaTime = (float)((m_now - m_last) * 1000 / (float)SDL_GetPerformanceFrequency());
 
+		m_now = SDL_GetTicks();
+
+		if (m_now > m_last)
+		{
+			m_deltaTime = ((float)(m_now - m_last) / 100.f);
+			m_last = m_now;
+		}
+		
 		update(m_deltaTime);
 		render();
 
@@ -161,7 +164,7 @@ void Game::update(float deltaTime)
 		}
 		case GameState::Play:
 		{
-			m_playScreen->update(&m_currentGamestate);
+			m_playScreen->update(&m_currentGamestate, deltaTime);
 			break;
 		}
 	}

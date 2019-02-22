@@ -28,9 +28,9 @@ void PlayScreen::initialise(SDL_Renderer* renderer)
 	std::cout << m_player->getComponent<PositionComponent>(1)->getPosition().y << std::endl;
 }
 
-void PlayScreen::update(GameState* gameState)
+void PlayScreen::update(GameState* gameState, float deltaTime)
 {
-	m_js.update();
+	m_js.update(deltaTime);
 	/*while (SDL_PollEvent(&m_event))
 	{
 		switch (m_event.type)

@@ -56,7 +56,7 @@ private:
 	bool m_isRunning;
 	SDL_Renderer *renderer;
 
-	float m_deltaTime;
+	double m_deltaTime;
 	Uint64 m_now, m_last;
 };
 
