@@ -221,5 +221,5 @@ void Game::clean()
 {
 	SDL_DestroyWindow(window);
 	SDL_Quit();
-	std::cout << "Game clened!" << std::endl;
+	std::cout << "Game cleaned!" << std::endl;
 }

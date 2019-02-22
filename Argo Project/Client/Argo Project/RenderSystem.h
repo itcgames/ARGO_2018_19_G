@@ -46,6 +46,7 @@ public:
 		for (auto *e : m_entities)
 		{
 			SDL_RenderCopy(renderer, e->getComponent<SpriteComponent>(1)->getTexture(), NULL, e->getComponent<SpriteComponent>(1)->getRect());
+		
 		}
 		//SDL_RenderCopy(renderer, m_texture, NULL, m_position);
 	}
