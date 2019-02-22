@@ -29,6 +29,6 @@ private:
 	SpriteComponent* m_sc;
 	//
 	JumpingSystem m_js;
-	RenderSystem m_rs;
+	RenderSystem* m_rs;
 
 };

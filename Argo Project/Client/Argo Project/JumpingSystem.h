@@ -39,37 +39,6 @@ public:
 	{
 		for (int i = 0; i < m_entities.size(); i++)
 		{
-
-			/*std::cout << m_entities[i]->getComponent<PositionComponent>(1)->getPosition().x << std::endl;
-			std::cout << m_entities[i]->getComponent<PositionComponent>(1)->getPosition().y << std::endl;*/
-
-			/*
-			case SDLK_UP:
-			{
-			if (!this->grounded)
-			{
-			if (this->yVel < 0) //if the player is not falling down
-			{
-			this->yVel = -this->yVel;
-			}
-			}
-			}
-			*/
-
-			/*
-			if (!this->grounded)
-			{
-			this->yVel += GRAVITY * deltaTime / 1000.f;
-			}
-			//if the player is on the ground
-			if (this->y >= WINDOW_HEIGHT - this->box.h)
-			{
-			this->grounded = true;
-			this->y = (float)WINDOW_HEIGHT - (float)this->box.h;
-			}
-			this->y += this->yVel;
-			*/
-
 			while (SDL_PollEvent(&m_event))
 			{
 				//
@@ -86,6 +55,7 @@ public:
 						{
 							m_velY = -16;
 							m_jump = true;
+							m_grounded = false;
 						}
 
 						break;
@@ -96,6 +66,7 @@ public:
 						{
 							m_velY = -16;
 							m_jump = true;
+							m_grounded = false;
 						}
 
 						break;
@@ -106,6 +77,7 @@ public:
 						{
 							m_velY = -16;
 							m_jump = true;
+							m_grounded = false;
 						}
 
 						break;
@@ -123,9 +95,9 @@ public:
 
 
 			//
-			if (m_entities[i]->getComponent<PositionComponent>(1)->getPosition().y >= 100)
+			if (m_entities[i]->getComponent<PositionComponent>(1)->getPosition().y >= 780)
 			{
-				m_entities[i]->getComponent<PositionComponent>(1)->setPosition(Vector2());
+				m_entities[i]->getComponent<PositionComponent>(1)->setPosition(Vector2(m_entities[i]->getComponent<PositionComponent>(1)->getPosition().x, 780));
 				m_jump = false;
 				m_grounded = true;
 			}
@@ -138,9 +110,9 @@ private:
 	SDL_Keycode m_key;
 
 	float m_velY, m_newY;
-	float m_gravity = 0.5;
+	float m_gravity = 0.7;
 
-	bool m_grounded, m_jump;
+	bool m_grounded = true, m_jump = false;
 };
 
 #endif // !JUMPINGVELOCITY_H

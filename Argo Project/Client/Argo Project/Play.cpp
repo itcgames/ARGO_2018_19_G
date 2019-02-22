@@ -17,16 +17,20 @@ void PlayScreen::initialise(SDL_Renderer* renderer)
 	initSprites(renderer);
 	m_player = new Entity();
 	m_pc = new PositionComponent(Vector2(m_playerRect->x, m_playerRect->y), 1);
-	m_sc = new SpriteComponent(m_playerTxt, m_playerRect, 1);
+	m_sc = new SpriteComponent(m_playerTxt, m_playerRect, 2);
 
 	m_player->addComponent<PositionComponent>(m_pc, 1);
-	m_player->addComponent<SpriteComponent>(m_sc, 1);
+	m_player->addComponent<SpriteComponent>(m_sc, 2);
 
 	m_js.addEntity(m_player);
+	m_rs = new RenderSystem();
+
+	std::cout << m_player->getComponent<PositionComponent>(1)->getPosition().y << std::endl;
 }
 
 void PlayScreen::update(GameState* gameState)
 {
+	m_js.update();
 	/*while (SDL_PollEvent(&m_event))
 	{
 		switch (m_event.type)
@@ -36,13 +40,15 @@ void PlayScreen::update(GameState* gameState)
 		}
 	}*/
 
+	
+	m_playerRect->y = m_player->getComponent<PositionComponent>(1)->getPosition().y;
 }
 
 void PlayScreen::render(SDL_Renderer *renderer)
 {
 	SDL_RenderCopy(renderer, m_backgroundTxt, NULL, m_backgroundPos);
 
-	m_rs.renderImage(renderer, m_player->getComponent<SpriteComponent>(1));
+	m_rs->renderImage(renderer, m_player->getComponent<SpriteComponent>(2));
 }
 
 
