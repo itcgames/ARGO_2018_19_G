@@ -1,16 +1,5 @@
 ﻿  Game.cpp
-c:\users\gameuser\desktop\argo_2018_19_g\argo project\client\argo project\jumpingsystem.h(144): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\gameuser\desktop\argo_2018_19_g\argo project\client\argo project\jumpingsystem.h(115): warning C4305: 'initializing': truncation from 'double' to 'float'
 c:\users\gameuser\desktop\argo_2018_19_g\argo project\client\argo project\jumpingsystem.h(40): warning C4018: '<': signed/unsigned mismatch
-  Play.cpp
-c:\users\gameuser\desktop\argo_2018_19_g\argo project\client\argo project\jumpingsystem.h(144): warning C4305: 'initializing': truncation from 'double' to 'float'
-c:\users\gameuser\desktop\argo_2018_19_g\argo project\client\argo project\jumpingsystem.h(40): warning C4018: '<': signed/unsigned mismatch
-c:\users\gameuser\desktop\argo_2018_19_g\argo project\client\argo project\play.cpp(19): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\gameuser\desktop\argo_2018_19_g\argo project\client\argo project\play.cpp(44): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-  Player.cpp
-c:\users\gameuser\desktop\argo_2018_19_g\argo project\client\argo project\jumpingsystem.h(144): warning C4305: 'initializing': truncation from 'double' to 'float'
-c:\users\gameuser\desktop\argo_2018_19_g\argo project\client\argo project\jumpingsystem.h(40): warning C4018: '<': signed/unsigned mismatch
-  main.cpp
-c:\users\gameuser\desktop\argo_2018_19_g\argo project\client\argo project\jumpingsystem.h(144): warning C4305: 'initializing': truncation from 'double' to 'float'
-c:\users\gameuser\desktop\argo_2018_19_g\argo project\client\argo project\jumpingsystem.h(40): warning C4018: '<': signed/unsigned mismatch
-  Generating Code...
+c:\users\gameuser\desktop\argo_2018_19_g\argo project\client\argo project\game.cpp(122): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
   Argo Project.vcxproj -> C:\Users\gameuser\Desktop\ARGO_2018_19_G\Argo Project\Client\Debug\Argo Project.exe
