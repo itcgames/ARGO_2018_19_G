@@ -24,10 +24,10 @@ void PlayScreen::initialise(SDL_Renderer* renderer)
 	m_player->addComponent<SpriteComponent>(m_sc, 2);
 
 	m_rs = new RenderSystem();
-	//m_rs->addEntity(m_player);
+	m_rs->addEntity(m_player);
 
 	SDL_Rect* rect = new SDL_Rect();
-	rect->x = 200; rect->y = 780;
+	rect->x = 800; rect->y = 830;
 	rect->w = 100; rect->h = 100;
 	createObstacle(rect);
 }
@@ -94,7 +94,7 @@ void PlayScreen::createObstacle(SDL_Rect* rect)
 	SpriteComponent* spriteComponent = new SpriteComponent(m_thumbtacTxt, rect, 2);
 
 	m_obstacle->addComponent<PositionComponent>(obsPos, 1);
-	m_obstacle->addComponent<SpriteComponent>(m_sc, 2);
+	m_obstacle->addComponent<SpriteComponent>(spriteComponent, 2);
 
 	m_rs->addEntity(m_obstacle);
 }
