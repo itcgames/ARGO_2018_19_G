@@ -45,5 +45,6 @@ private:
 	//
 	JumpingSystem m_js;
 	RenderSystem* m_rs;
+	NonPlayerMovementSystem* m_nonPlayerMovementSystem;
 
 };

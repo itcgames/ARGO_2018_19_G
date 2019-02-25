@@ -23,6 +23,7 @@ void PlayScreen::initialise(SDL_Renderer* renderer)
 	m_player->addComponent<PositionComponent>(m_pc, 1);
 	m_player->addComponent<SpriteComponent>(m_sc, 2);
 
+	m_nonPlayerMovementSystem = new NonPlayerMovementSystem();
 	m_rs = new RenderSystem();
 	m_rs->addEntity(m_player);
 
@@ -34,6 +35,9 @@ void PlayScreen::initialise(SDL_Renderer* renderer)
 
 void PlayScreen::update(GameState* gameState)
 {
+
+	m_nonPlayerMovementSystem->update();
+
 	/*while (SDL_PollEvent(&m_event))
 	{
 		switch (m_event.type)
@@ -90,11 +94,14 @@ void PlayScreen::createObstacle(SDL_Rect* rect)
 {
 	Entity* m_obstacle = new Entity();
 	PositionComponent* obsPos = new PositionComponent(Vector2(rect->x, rect->y), 1);
-	int ranNum = rand() % m_obstacleTextures.size();
-	SpriteComponent* spriteComponent = new SpriteComponent(m_thumbtacTxt, rect, 2);
+
+	int randNum = rand() % m_obstacleTextures.size();
+
+	SpriteComponent* spriteComponent = new SpriteComponent(m_obstacleTextures[randNum], rect, 2);
 
 	m_obstacle->addComponent<PositionComponent>(obsPos, 1);
 	m_obstacle->addComponent<SpriteComponent>(spriteComponent, 2);
 
 	m_rs->addEntity(m_obstacle);
+	m_nonPlayerMovementSystem->addEntity(m_obstacle);
 }

@@ -17,5 +17,6 @@
 #include "SpriteComponent.h" 
 #include "RenderSystem.h"
 #include "JumpingSystem.h"
+#include "NonPlayerMovementSystem.h"
 
 #endif //! ECS_H
