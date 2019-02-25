@@ -29,13 +29,19 @@ private:
 	SDL_Texture* m_coinTxtTwo;
 	SDL_Texture* m_coinTxtThree;
 	//
+	SDL_Texture* m_platformText;
+	//
 	SDL_Rect* m_coinRectOne;
 	SDL_Rect* m_coinRectTwo;
 	SDL_Rect* m_coinRectThree;
 	//
+	SDL_Rect* m_platformRect;
+	//
 	Entity *player;
 	//
 	Entity *m_coins[12];
+	//
+	Entity *m_platform;
 
 	//
 	PositionComponent* m_pc;
@@ -49,7 +55,12 @@ private:
 	PositionComponent* m_pcCoinTwo;
 	PositionComponent* m_pcCoinThree;
 	//
+	PositionComponent* m_pcPlatform;
+	//
+	PlatformComponent* m_plc;
+	
+	//
 	JumpingSystem m_js;
 	RenderSystem* m_rs;
-
+	CollisionSystem* m_cs;
 };

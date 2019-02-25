@@ -24,6 +24,7 @@ void PlayScreen::initialise(SDL_Renderer* renderer)
 
 	m_js.addEntity(m_player);
 	m_rs = new RenderSystem();
+	m_cs = new CollisionSystem();
 
 	for (int i = 0; i < 12; i++)
 	{
@@ -60,6 +61,16 @@ void PlayScreen::initialise(SDL_Renderer* renderer)
 		}
 	}
 
+	//
+	m_platform = new Entity();
+	//
+	m_pcPlatform = new PositionComponent(Vector2(), 1);
+	//
+	m_plc = new PlatformComponent(m_platformText, m_platformRect, 4);
+	//
+	m_platform->addComponent<PlatformComponent>(m_plc, 4);
+
+
 	std::cout << m_player->getComponent<PositionComponent>(1)->getPosition().y << std::endl;
 }
 
@@ -75,6 +86,12 @@ void PlayScreen::update(GameState* gameState, float deltaTime)
 		}
 	}*/
 
+	if (m_cs->platformCollisions(m_player, m_platform) == true)
+	{
+		m_js.setGrounded(true);
+		m_player->getComponent<PositionComponent>(1)->setPosition(Vector2(m_player->getComponent<PositionComponent>(1)->getPosition().x, 
+		(m_platform->getComponent<PlatformComponent>(4)->getRect()->y - m_player->getComponent<SpriteComponent>(2)->getRect()->h) - 1));
+	}
 	
 	m_playerRect->y = m_player->getComponent<PositionComponent>(1)->getPosition().y;
 }
@@ -91,6 +108,8 @@ void PlayScreen::render(SDL_Renderer *renderer)
 
 	//
 	m_rs->renderImage(renderer, m_player->getComponent<SpriteComponent>(2));
+
+	m_rs->renderPlatform(renderer, m_platform->getComponent<PlatformComponent>(4));
 }
 
 
@@ -104,6 +123,8 @@ void PlayScreen::initSprites(SDL_Renderer *renderer)
 	SDL_Surface* coinTwoSurface = IMG_Load("resources/LargeCoin.png");
 	SDL_Surface* coinThreeSurface = IMG_Load("resources/Wallet.png");
 	//
+	SDL_Surface* platformSurface = IMG_Load("resources/platform.png");
+	//
 	m_backgroundTxt = SDL_CreateTextureFromSurface(renderer, backgroundSurface);
 	m_playerTxt = SDL_CreateTextureFromSurface(renderer, playerSurface);
 	//
@@ -111,11 +132,14 @@ void PlayScreen::initSprites(SDL_Renderer *renderer)
 	m_coinTxtTwo = SDL_CreateTextureFromSurface(renderer, coinTwoSurface);
 	m_coinTxtThree = SDL_CreateTextureFromSurface(renderer, coinThreeSurface);
 	//
+	m_platformText = SDL_CreateTextureFromSurface(renderer, platformSurface);
+	//
 	SDL_FreeSurface(backgroundSurface);
 	SDL_FreeSurface(playerSurface);
 	SDL_FreeSurface(coinOneSurface);
 	SDL_FreeSurface(coinTwoSurface);
 	SDL_FreeSurface(coinThreeSurface);
+	SDL_FreeSurface(platformSurface);
 	//
 	m_backgroundPos = new SDL_Rect();
 	m_backgroundPos->x = 0; m_backgroundPos->y = 0;
@@ -136,4 +160,8 @@ void PlayScreen::initSprites(SDL_Renderer *renderer)
 	m_coinRectThree = new SDL_Rect();
 	m_coinRectThree->x = 360; m_coinRectThree->y = 780;
 	m_coinRectThree->w = 110; m_coinRectThree->h = 100;
+	//
+	m_platformRect = new SDL_Rect();
+	m_platformRect->x = 100; m_platformRect->y = 930;
+	m_platformRect->w = 250; m_platformRect->h = 50;
 }

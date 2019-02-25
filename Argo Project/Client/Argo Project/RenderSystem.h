@@ -51,14 +51,22 @@ public:
 		//SDL_RenderCopy(renderer, m_texture, NULL, m_position);
 	}
 
+	//
 	void renderImage(SDL_Renderer* renderer, SpriteComponent* spriteComponent)
 	{
 		SDL_RenderCopy(renderer, spriteComponent->getTexture(), NULL, spriteComponent->getRect());
 	}
 
+	//
 	void renderCoin(SDL_Renderer* renderer, CoinComponent* coinComponent)
 	{
 		SDL_RenderCopy(renderer, coinComponent->getTexture(), NULL, coinComponent->getRect());
+	}
+
+	//
+	void renderPlatform(SDL_Renderer* renderer, PlatformComponent* platformComponent)
+	{
+		SDL_RenderCopy(renderer, platformComponent->getTexture(), NULL, platformComponent->getRect());
 	}
 
 private:

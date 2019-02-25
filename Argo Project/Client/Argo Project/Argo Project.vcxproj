@@ -140,6 +140,8 @@
   <ItemGroup>
     <ClInclude Include="BaseSystem.h" />
     <ClInclude Include="CoinComponent.h" />
+    <ClInclude Include="CollisionComponent.h" />
+    <ClInclude Include="CollisionSystem.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="CreditsScreen.h" />
     <ClInclude Include="ECS.h" />
@@ -151,6 +153,7 @@
     <ClInclude Include="MainMenuScene.h" />
     <ClInclude Include="MenuManager.h" />
     <ClInclude Include="OptionsScreen.h" />
+    <ClInclude Include="PlatformComponent.h" />
     <ClInclude Include="Play.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PositionComponent.h" />
