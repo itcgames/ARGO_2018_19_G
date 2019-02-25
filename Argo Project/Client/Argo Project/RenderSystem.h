@@ -15,7 +15,7 @@
 
 #include "BaseSystem.h"
 #include "Entity.h"
-#include "PositionComponent.h"
+#include "ECS.h"
 
 class RenderSystem : public BaseSystem
 {
@@ -54,6 +54,11 @@ public:
 	void renderImage(SDL_Renderer* renderer, SpriteComponent* spriteComponent)
 	{
 		SDL_RenderCopy(renderer, spriteComponent->getTexture(), NULL, spriteComponent->getRect());
+	}
+
+	void renderCoin(SDL_Renderer* renderer, CoinComponent* coinComponent)
+	{
+		SDL_RenderCopy(renderer, coinComponent->getTexture(), NULL, coinComponent->getRect());
 	}
 
 private:

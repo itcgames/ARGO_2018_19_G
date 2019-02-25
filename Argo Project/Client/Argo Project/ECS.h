@@ -15,6 +15,7 @@
 #include "Component.h"
 #include "PositionComponent.h"
 #include "SpriteComponent.h" 
+#include "CoinComponent.h"
 #include "RenderSystem.h"
 #include "JumpingSystem.h"
 

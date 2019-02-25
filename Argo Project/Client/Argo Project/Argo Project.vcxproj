@@ -139,6 +139,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseSystem.h" />
+    <ClInclude Include="CoinComponent.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="CreditsScreen.h" />
     <ClInclude Include="ECS.h" />
