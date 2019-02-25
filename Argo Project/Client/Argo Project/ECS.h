@@ -15,7 +15,11 @@
 #include "Component.h"
 #include "PositionComponent.h"
 #include "SpriteComponent.h" 
+#include "CoinComponent.h"
+#include "PlatformComponent.h"
+#include "CollisionComponent.h"
 #include "RenderSystem.h"
 #include "JumpingSystem.h"
+#include "CollisionSystem.h"
 
 #endif //! ECS_H

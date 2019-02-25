@@ -2,8 +2,11 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <iostream>
+
 #include "MenuManager.h"
 #include "ECS.h"
+
+
 class PlayScreen
 {
 public:
@@ -15,20 +18,49 @@ public:
 	void render(SDL_Renderer *renderer);
 	void initSprites(SDL_Renderer *renderer);
 private:
-	Entity *m_player;
+	Entity * m_player;
 	SDL_Event m_event;
 	SDL_Texture* m_backgroundTxt;
 	SDL_Texture* m_playerTxt;
 	SDL_Rect* m_backgroundPos;
 	SDL_Rect* m_playerRect;
-
+	//
+	SDL_Texture* m_coinTxtOne;
+	SDL_Texture* m_coinTxtTwo;
+	SDL_Texture* m_coinTxtThree;
+	//
+	SDL_Texture* m_platformText;
+	//
+	SDL_Rect* m_coinRectOne;
+	SDL_Rect* m_coinRectTwo;
+	SDL_Rect* m_coinRectThree;
+	//
+	SDL_Rect* m_platformRect;
+	//
 	Entity *player;
+	//
+	Entity *m_coins[12];
+	//
+	Entity *m_platform;
 
 	//
 	PositionComponent* m_pc;
 	SpriteComponent* m_sc;
 	//
+	CoinComponent* m_ccOne;
+	CoinComponent* m_ccTwo;
+	CoinComponent* m_ccThree;
+	//
+	PositionComponent* m_pcCoinOne;
+	PositionComponent* m_pcCoinTwo;
+	PositionComponent* m_pcCoinThree;
+	//
+	PositionComponent* m_pcPlatform;
+	//
+	PlatformComponent* m_plc;
+	
+	//
 	JumpingSystem m_js;
 	RenderSystem* m_rs;
-
+	CollisionSystem* m_cs;
 };

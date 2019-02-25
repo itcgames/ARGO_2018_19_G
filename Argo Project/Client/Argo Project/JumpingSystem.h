@@ -97,14 +97,20 @@ public:
 
 
 			//
-			if (m_entities[i]->getComponent<PositionComponent>(1)->getPosition().y >= 780)
+			/*if (m_entities[i]->getComponent<PositionComponent>(1)->getPosition().y >= 780)
 			{
 				m_entities[i]->getComponent<PositionComponent>(1)->setPosition(Vector2(m_entities[i]->getComponent<PositionComponent>(1)->getPosition().x, 780));
 				m_jump = false;
 				m_grounded = true;
-			}
+			}*/
 
 		}
+	}
+
+	void setGrounded(bool grounded)
+	{
+		m_grounded = grounded;
+		m_jump = false;
 	}
 
 private:
