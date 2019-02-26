@@ -115,7 +115,7 @@ void Game::run()
 
 		if (m_now > m_last)
 		{
-			m_deltaTime = ((float)(m_now - m_last) / 1000.f);
+			m_deltaTime = ((float)(m_now - m_last) / 100.f);
 			m_last = m_now;
 		}
 		
