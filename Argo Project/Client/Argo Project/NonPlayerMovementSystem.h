@@ -18,6 +18,7 @@ public:
 	{
 		for (int i = 0; i < m_entities.size(); i++)
 		{
+
 			m_entities[i]->getComponent<PositionComponent>(1)->setPosition(Vector2(m_entities[i]->getComponent<PositionComponent>(1)->getPosition().x - (m_speed * deltatime), m_entities[i]->getComponent<PositionComponent>(1)->getPosition().y));
 
 			SDL_Rect* newRect = new SDL_Rect();
@@ -25,9 +26,19 @@ public:
 			newRect->w = m_entities[i]->getComponent<SpriteComponent>(2)->getRect()->w; newRect->h = m_entities[i]->getComponent<SpriteComponent>(2)->getRect()->h;
 
 			m_entities[i]->getComponent<SpriteComponent>(2)->setRect(newRect);
+
+
+			if (m_entities[i]->getComponent<PositionComponent>(1)->getPosition().x + m_entities[i]->getComponent<SpriteComponent>(2)->getRect()->w < 0)
+			{
+				//m_entities[i]->~Entity();
+				m_entities[i] = nullptr;
+				m_entities.erase(m_entities.begin() + i);
+				i--;
+			}
 		}
 	}
+	
 
 private:
-	float m_speed = 15;
+	float m_speed = 10;
 };

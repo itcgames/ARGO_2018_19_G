@@ -20,6 +20,8 @@ public:
 	void createObstacle(SDL_Rect* rect);
 	void createCoin(SDL_Rect* rect);
 	void createPlatform(SDL_Rect* rect);
+	void createWave(int type);
+	void handleCollisions();
 private:
 	Entity * m_player;
 	SDL_Event m_event;
@@ -59,4 +61,8 @@ private:
 	RenderSystem* m_rs;
 	CollisionSystem* m_cs;
 	NonPlayerMovementSystem* m_nonPlayerMovementSystem;
+
+	int m_waveInterval;
+
+	int m_score;
 };

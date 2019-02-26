@@ -20,7 +20,7 @@
 class CollisionSystem : public BaseSystem
 {
 public:
-	bool platformCollisions(Entity* player, Entity* object)
+	bool intersectRect(Entity* player, Entity* object)
 	{
 		bool collide = false;
 		//

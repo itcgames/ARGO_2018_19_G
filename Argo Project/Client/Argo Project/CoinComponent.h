@@ -28,17 +28,32 @@ public:
 		m_coinType(coinType),
 		m_isActive(true)
 	{
-		if (m_coinType != 1 ||
-			m_coinType != 2 ||
-			m_coinType != 3)
+		if (m_coinType == NULL)
 		{
 			m_coinType = 1;
+		}
+		if (m_coinType == 1)
+		{
+			m_score = 100;
+		}
+		if (m_coinType == 2)
+		{
+			m_score = 500;
+		}
+		if (m_coinType == 3)
+		{
+			m_score = 2000;
 		}
 	}
 
 	~CoinComponent()
 	{
 
+	}
+
+	int getScore()
+	{
+		return m_score;
 	}
 
 	//
@@ -55,6 +70,7 @@ public:
 
 private:
 	int m_coinType;
+	int m_score;
 	bool m_isActive;
 	SDL_Texture * m_texture;
 	SDL_Rect * m_rect;

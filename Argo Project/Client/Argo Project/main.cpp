@@ -13,11 +13,13 @@
 #define SDL_MAIN_HANDLED
 
 #include "Game.h"
+#include <time.h>
 
 //Game *game = nullptr;
 
 int main()
 {
+	srand(time(NULL));
 	Game* game = new Game();
 	game->init("SDL", 0, 0, 1900, 1000, false);
 
