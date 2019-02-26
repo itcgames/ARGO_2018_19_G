@@ -15,6 +15,9 @@ PlayScreen::~PlayScreen()
 void PlayScreen::initialise(SDL_Renderer* renderer)
 {
 	initSprites(renderer);
+	m_obstacles.clear();
+	m_coins.clear();
+	m_platforms.clear();
 
 	m_rs = new RenderSystem();
 	m_cs = new CollisionSystem();
@@ -51,9 +54,12 @@ void PlayScreen::initialise(SDL_Renderer* renderer)
 
 	m_waveInterval = 0;
 	m_score = 0;
+
+	m_lives = 3;
+	m_activeHealth = m_fullHealth;
 }
 
-void PlayScreen::update(GameState* gameState, float deltaTime)
+void PlayScreen::update(GameState* gameState, float deltaTime, SDL_Renderer* renderer)
 {
 	m_js.update(deltaTime);
 
@@ -67,37 +73,44 @@ void PlayScreen::update(GameState* gameState, float deltaTime)
 		m_waveInterval = 0;
 	}
 
-	for (int i = 0; i < m_platforms.size(); i++)
-	{
-		if (m_cs->intersectRect(m_player, m_platforms[i]) == true)
-		{
-			m_js.setGrounded(true);
-			m_player->getComponent<PositionComponent>(1)->setPosition(Vector2(m_player->getComponent<PositionComponent>(1)->getPosition().x,
-				(m_platforms[i]->getComponent<SpriteComponent>(2)->getRect()->y - m_player->getComponent<SpriteComponent>(2)->getRect()->h) - 1));
-		}
-	}
-
-	for (int i = 0; i < m_coins.size(); i++)
-	{
-		if (m_cs->intersectRect(m_player, m_coins[i]) == true)
-		{
-			m_score += m_coins[i]->getComponent<CoinComponent>(3)->getScore();
-			m_coins[i] = nullptr;
-			m_coins.erase(m_coins.begin() + i);
-			i--;
-		}
-	}
-
-	std::cout << m_score << std::endl;
+	collisionsAndClearing();
 
 	m_nonPlayerMovementSystem->update(deltaTime);
 
 	m_playerRect->y = m_player->getComponent<PositionComponent>(1)->getPosition().y;
+
+	switch (m_lives)
+	{
+	case 2: 
+		m_activeHealth = m_damagedHealth;
+		break;
+	case 1:
+		m_activeHealth = m_lowHealth;
+		break;
+	case 0:
+		
+		*gameState = GameState::MainMenu;
+		initialise(renderer);
+	default:
+		break;
+	}
 }
 
 void PlayScreen::render(SDL_Renderer *renderer)
 {
 	SDL_RenderCopy(renderer, m_backgroundTxt, NULL, m_backgroundPos);
+
+	SDL_RenderCopy(renderer, m_activeHealth, NULL, m_healthbarRect);
+
+	for (int i = 0; i < m_coins.size(); i++)
+	{
+		m_rs->renderImage(renderer, m_coins[i]->getComponent<SpriteComponent>(2));
+	}
+
+	for (int i = 0; i < m_obstacles.size(); i++)
+	{
+		m_rs->renderImage(renderer, m_obstacles[i]->getComponent<SpriteComponent>(2));
+	}
 
 	m_rs->render(renderer);
 }
@@ -120,6 +133,11 @@ void PlayScreen::initSprites(SDL_Renderer *renderer)
 	SDL_Surface* mouseSurface = IMG_Load("ASSETS/Obstacle_Mouse.png");
 	SDL_Surface* splintersSurface = IMG_Load("ASSETS/Hazard4_Splinters2.png");
 	//
+	SDL_Surface* fullHealthSurface = IMG_Load("ASSETS/FullHealthBar.png");
+	SDL_Surface* damagedHealthbarSurface = IMG_Load("ASSETS/DamagedHealthBar.png");
+	SDL_Surface* lowHealthbarSurface = IMG_Load("ASSETS/HeavyDamagedHealthBar.png");
+
+
 
 	m_wiresTxt = SDL_CreateTextureFromSurface(renderer, wiresSurface);
 	m_obstacleTextures.push_back(m_wiresTxt);
@@ -139,6 +157,14 @@ void PlayScreen::initSprites(SDL_Renderer *renderer)
 	//
 	m_platformText = SDL_CreateTextureFromSurface(renderer, platformSurface);
 	//
+	m_fullHealth = SDL_CreateTextureFromSurface(renderer, fullHealthSurface);
+	m_damagedHealth = SDL_CreateTextureFromSurface(renderer, damagedHealthbarSurface);
+	m_lowHealth = SDL_CreateTextureFromSurface(renderer, lowHealthbarSurface);
+
+	m_healthbarRect = new SDL_Rect();
+	m_healthbarRect->x = 100; m_healthbarRect->y = 100;
+	m_healthbarRect->w = 500; m_healthbarRect->h = 100;
+
 	m_backgroundPos = new SDL_Rect();
 	m_backgroundPos->x = 0; m_backgroundPos->y = 0;
 	m_backgroundPos->w = 1920; m_backgroundPos->h = 1080;
@@ -151,7 +177,7 @@ void PlayScreen::initSprites(SDL_Renderer *renderer)
 
 void PlayScreen::createObstacle(SDL_Rect* rect)
 {
-	Entity* m_obstacle = new Entity();
+	Entity* obstacle = new Entity();
 
 	int randNum = rand() % m_obstacleTextures.size();
 
@@ -165,11 +191,12 @@ void PlayScreen::createObstacle(SDL_Rect* rect)
 
 	SpriteComponent* spriteComponent = new SpriteComponent(m_obstacleTextures[randNum], rect, 2);
 
-	m_obstacle->addComponent<PositionComponent>(obsPos, 1);
-	m_obstacle->addComponent<SpriteComponent>(spriteComponent, 2);
+	obstacle->addComponent<PositionComponent>(obsPos, 1);
+	obstacle->addComponent<SpriteComponent>(spriteComponent, 2);
 
-	m_rs->addEntity(m_obstacle);
-	m_nonPlayerMovementSystem->addEntity(m_obstacle);
+	m_nonPlayerMovementSystem->addEntity(obstacle);
+
+	m_obstacles.push_back(obstacle);
 }
 
 void PlayScreen::createCoin(SDL_Rect* rect)
@@ -208,7 +235,6 @@ void PlayScreen::createCoin(SDL_Rect* rect)
 
 	PositionComponent* pc = new PositionComponent(Vector2(rect->x, rect->y), 1);
 	m_coin->addComponent<PositionComponent>(pc, 1);
-	m_rs->addEntity(m_coin);
 	m_nonPlayerMovementSystem->addEntity(m_coin);
 
 	m_coins.push_back(m_coin);
@@ -327,5 +353,44 @@ void PlayScreen::createWave(int type)
 
 		break;
 	}
+	}
+}
+
+void PlayScreen::collisionsAndClearing()
+{
+	for (int i = 0; i < m_platforms.size(); i++)
+	{
+		if (m_cs->intersectRect(m_player, m_platforms[i]) == true)
+		{
+			m_js.setGrounded(true);
+			m_player->getComponent<PositionComponent>(1)->setPosition(Vector2(m_player->getComponent<PositionComponent>(1)->getPosition().x,
+				(m_platforms[i]->getComponent<SpriteComponent>(2)->getRect()->y - m_player->getComponent<SpriteComponent>(2)->getRect()->h) - 1));
+		}
+	}
+
+	for (int i = 0; i < m_coins.size(); i++)
+	{
+		if (m_cs->intersectRect(m_player, m_coins[i]) == true)
+		{
+			m_score += m_coins[i]->getComponent<CoinComponent>(3)->getScore();
+			m_coins[i] = nullptr;
+			m_coins.erase(m_coins.begin() + i);
+			i--;
+		}
+	}
+
+	for (int i = 0; i < m_obstacles.size(); i++)
+	{
+		if (m_cs->intersectRect(m_player, m_obstacles[i]))
+		{
+			m_lives -= 1;
+		}
+
+		if (m_obstacles[i]->getComponent<PositionComponent>(1)->getPosition().x + m_obstacles[i]->getComponent<SpriteComponent>(2)->getRect()->w < 0 || m_cs->intersectRect(m_player, m_obstacles[i]))
+		{
+			m_obstacles[i] = nullptr;
+			m_obstacles.erase(m_obstacles.begin() + i);
+			i--;
+		}
 	}
 }

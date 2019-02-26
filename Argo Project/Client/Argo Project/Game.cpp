@@ -164,7 +164,7 @@ void Game::update(float deltaTime)
 		}
 		case GameState::Play:
 		{
-			m_playScreen->update(&m_currentGamestate, deltaTime);
+			m_playScreen->update(&m_currentGamestate, deltaTime, renderer);
 			break;
 		}
 	}

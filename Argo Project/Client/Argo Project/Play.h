@@ -1,6 +1,7 @@
 #pragma once
 #include <SDL.h>
 #include <SDL_image.h>
+#include <SDL_ttf.h>
 #include <iostream>
 
 #include "MenuManager.h"
@@ -14,14 +15,14 @@ public:
 	~PlayScreen();
 
 	void initialise(SDL_Renderer* renderer);
-	void update(GameState *gameState, float deltaTime);
+	void update(GameState *gameState, float deltaTime, SDL_Renderer* renderer);
 	void render(SDL_Renderer *renderer);
 	void initSprites(SDL_Renderer *renderer);
 	void createObstacle(SDL_Rect* rect);
 	void createCoin(SDL_Rect* rect);
 	void createPlatform(SDL_Rect* rect);
 	void createWave(int type);
-	void handleCollisions();
+	void collisionsAndClearing();
 private:
 	Entity * m_player;
 	SDL_Event m_event;
@@ -40,6 +41,15 @@ private:
 	SDL_Texture* m_coinTxtThree;
 
 	SDL_Texture* m_platformText;
+
+	SDL_Texture* m_activeHealth;
+	SDL_Texture* m_fullHealth;
+	SDL_Texture* m_damagedHealth;
+	SDL_Texture* m_lowHealth;
+	SDL_Rect* m_healthbarRect;
+
+	SDL_Texture* m_scoreTxt;
+	SDL_Rect* m_scorePos;
 	//
 	SDL_Rect* m_backgroundPos;
 	SDL_Rect* m_playerRect;
@@ -65,4 +75,8 @@ private:
 	int m_waveInterval;
 
 	int m_score;
+
+	int m_lives;
+	int m_invincibilityTimer;
+	bool m_invincible;
 };
