@@ -24,9 +24,8 @@ public:
 	{
 		bool collide = false;
 		//
-		if (SDL_HasIntersection(player->getComponent<SpriteComponent>(2)->getRect(), object->getComponent<PlatformComponent>(4)->getRect()) == true)
+		if (SDL_HasIntersection(player->getComponent<SpriteComponent>(2)->getRect(), object->getComponent<SpriteComponent>(2)->getRect()) == true)
 		{
-			std::cout << "Collision!" << std::endl;
 			collide = true;
 		}
 

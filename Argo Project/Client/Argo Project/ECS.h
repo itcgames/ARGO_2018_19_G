@@ -21,5 +21,5 @@
 #include "RenderSystem.h"
 #include "JumpingSystem.h"
 #include "CollisionSystem.h"
-
+#include "NonPlayerMovementSystem.h"
 #endif //! ECS_H

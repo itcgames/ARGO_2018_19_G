@@ -72,7 +72,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 		m_playScreen = new PlayScreen(renderer);
 
 		m_isRunning = true;
-		m_currentGamestate = GameState::Play;
+		m_currentGamestate = GameState::Licence;
 	}
 
 	//
@@ -115,7 +115,7 @@ void Game::run()
 
 		if (m_now > m_last)
 		{
-			m_deltaTime = ((float)(m_now - m_last) / 100.f);
+			m_deltaTime = ((float)(m_now - m_last) / 1000.f);
 			m_last = m_now;
 		}
 		

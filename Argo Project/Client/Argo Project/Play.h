@@ -17,45 +17,40 @@ public:
 	void update(GameState *gameState, float deltaTime);
 	void render(SDL_Renderer *renderer);
 	void initSprites(SDL_Renderer *renderer);
+	void createObstacle(SDL_Rect* rect);
+	void createCoin(SDL_Rect* rect);
+	void createPlatform(SDL_Rect* rect);
 private:
 	Entity * m_player;
 	SDL_Event m_event;
+
 	SDL_Texture* m_backgroundTxt;
+
 	SDL_Texture* m_playerTxt;
-	SDL_Rect* m_backgroundPos;
-	SDL_Rect* m_playerRect;
-	//
+
+	SDL_Texture* m_wiresTxt;
+	SDL_Texture* m_thumbtacTxt;
+	SDL_Texture* m_mouseTxt;
+	SDL_Texture* m_splintersTxt;
+
 	SDL_Texture* m_coinTxtOne;
 	SDL_Texture* m_coinTxtTwo;
 	SDL_Texture* m_coinTxtThree;
-	//
+
 	SDL_Texture* m_platformText;
 	//
-	SDL_Rect* m_coinRectOne;
-	SDL_Rect* m_coinRectTwo;
-	SDL_Rect* m_coinRectThree;
+	SDL_Rect* m_backgroundPos;
+	SDL_Rect* m_playerRect;
+
 	//
-	SDL_Rect* m_platformRect;
-	//
-	Entity *player;
-	//
-	Entity *m_coins[12];
-	//
-	Entity *m_platform;
+	std::vector<SDL_Texture*> m_obstacleTextures;
+	std::vector<Entity*> m_obstacles;
+	std::vector<Entity*> m_platforms;
+	std::vector<Entity*> m_coins;
 
 	//
 	PositionComponent* m_pc;
 	SpriteComponent* m_sc;
-	//
-	CoinComponent* m_ccOne;
-	CoinComponent* m_ccTwo;
-	CoinComponent* m_ccThree;
-	//
-	PositionComponent* m_pcCoinOne;
-	PositionComponent* m_pcCoinTwo;
-	PositionComponent* m_pcCoinThree;
-	//
-	PositionComponent* m_pcPlatform;
 	//
 	PlatformComponent* m_plc;
 	
@@ -63,4 +58,5 @@ private:
 	JumpingSystem m_js;
 	RenderSystem* m_rs;
 	CollisionSystem* m_cs;
+	NonPlayerMovementSystem* m_nonPlayerMovementSystem;
 };

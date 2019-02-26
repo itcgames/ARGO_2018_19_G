@@ -47,32 +47,11 @@ public:
 		return m_isActive;
 	}
 
-	SDL_Rect* getRect()
-	{
-		return m_rect;
-	}
-
-	SDL_Texture* getTexture()
-	{
-		return m_texture;
-	}
-
 	//
 	void seActive(bool active)
 	{
 		m_isActive = active;
 	}
-
-	void setRect(SDL_Rect* rect)
-	{
-		m_rect = rect;
-	}
-
-	void setTexture(SDL_Texture * texture)
-	{
-		m_texture = texture;
-	}
-
 
 private:
 	int m_coinType;

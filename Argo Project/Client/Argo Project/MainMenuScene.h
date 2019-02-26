@@ -14,7 +14,6 @@ public:
 	void render(SDL_Renderer *renderer);
 	void initButtons(SDL_Renderer* renderer);
 
-	
 private:
 	SDL_Point* mouse;
 	SDL_Event m_event;
@@ -22,6 +21,8 @@ private:
 	SDL_Texture* m_optionsTxt;
 	SDL_Texture* m_helpTxt;
 	SDL_Texture* m_quitTxt;
+	SDL_Texture* m_backgroundTxt;
+	SDL_Rect* m_backgroundPos;
 	SDL_Rect* m_playPos;
 	SDL_Rect* m_optionsPos;
 	SDL_Rect* m_helpPos;
