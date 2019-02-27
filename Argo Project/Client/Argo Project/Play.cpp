@@ -14,7 +14,13 @@ PlayScreen::~PlayScreen()
 
 void PlayScreen::initialise(SDL_Renderer* renderer)
 {
+
+	m_score = 0;
+
 	initSprites(renderer);
+	m_obstacles.clear();
+	m_coins.clear();
+	m_platforms.clear();
 
 	m_rs = new RenderSystem();
 	m_cs = new CollisionSystem();
@@ -30,11 +36,6 @@ void PlayScreen::initialise(SDL_Renderer* renderer)
 
 	m_nonPlayerMovementSystem = new NonPlayerMovementSystem();
 
-	SDL_Rect* coinRect = new SDL_Rect();
-	coinRect->x = 1920; coinRect->y = 780;
-	coinRect->w = 70; coinRect->h = 70;
-	createCoin(coinRect);
-	
 	SDL_Rect* ground = new SDL_Rect();
 	ground->x = 0; ground->y = 930;
 	ground->w = 1920; ground->h = 50;
@@ -51,43 +52,67 @@ void PlayScreen::initialise(SDL_Renderer* renderer)
 	m_rs->addEntity(groundPlatform);
 	m_platforms.push_back(groundPlatform);
 
+	int ran = rand() % 3 + 1;
+	createWave(ran);
 
-	SDL_Rect* plRect = new SDL_Rect();
-	plRect->x = 100; plRect->y = 930;
-	plRect->w = 250; plRect->h = 50;
-	//createPlatform(plRect);
+	m_waveInterval = 0;
 
-	SDL_Rect* rect = new SDL_Rect();
-	rect->x = 1920; rect->y = 830;
-	rect->w = 100; rect->h = 100;
-	createObstacle(rect);
-
-	std::cout << m_player->getComponent<PositionComponent>(1)->getPosition().y << std::endl;
+	m_lives = 3;
+	m_activeHealth = m_fullHealth;
 }
 
-void PlayScreen::update(GameState* gameState, float deltaTime)
+void PlayScreen::update(GameState* gameState, float deltaTime, SDL_Renderer* renderer)
 {
 	m_js.update(deltaTime);
 
-	m_nonPlayerMovementSystem->update(deltaTime);
-	
-	for (int i = 0; i < m_platforms.size(); i++)
-	{
+	m_waveInterval++;
 
-		if (m_cs->platformCollisions(m_player, m_platforms[i]) == true)
-		{
-			m_js.setGrounded(true);
-			m_player->getComponent<PositionComponent>(1)->setPosition(Vector2(m_player->getComponent<PositionComponent>(1)->getPosition().x,
-				(m_platforms[i]->getComponent<SpriteComponent>(2)->getRect()->y - m_player->getComponent<SpriteComponent>(2)->getRect()->h) - 1));
-		}
+	if (m_waveInterval > 20000)
+	{
+		int randNum = rand() % 3 + 1;
+
+		createWave(randNum);
+		m_waveInterval = 0;
 	}
 
+	collisionsAndClearing();
+
+	m_nonPlayerMovementSystem->update(deltaTime);
+
 	m_playerRect->y = m_player->getComponent<PositionComponent>(1)->getPosition().y;
+
+	switch (m_lives)
+	{
+	case 2: 
+		m_activeHealth = m_damagedHealth;
+		break;
+	case 1:
+		m_activeHealth = m_lowHealth;
+		break;
+	case 0:
+		
+		*gameState = GameState::MainMenu;
+		initialise(renderer);
+	default:
+		break;
+	}
 }
 
 void PlayScreen::render(SDL_Renderer *renderer)
 {
 	SDL_RenderCopy(renderer, m_backgroundTxt, NULL, m_backgroundPos);
+
+	SDL_RenderCopy(renderer, m_activeHealth, NULL, m_healthbarRect);
+
+	for (int i = 0; i < m_coins.size(); i++)
+	{
+		m_rs->renderImage(renderer, m_coins[i]->getComponent<SpriteComponent>(2));
+	}
+
+	for (int i = 0; i < m_obstacles.size(); i++)
+	{
+		m_rs->renderImage(renderer, m_obstacles[i]->getComponent<SpriteComponent>(2));
+	}
 
 	m_rs->render(renderer);
 }
@@ -110,6 +135,9 @@ void PlayScreen::initSprites(SDL_Renderer *renderer)
 	SDL_Surface* mouseSurface = IMG_Load("ASSETS/Obstacle_Mouse.png");
 	SDL_Surface* splintersSurface = IMG_Load("ASSETS/Hazard4_Splinters2.png");
 	//
+	SDL_Surface* fullHealthSurface = IMG_Load("ASSETS/FullHealthBar.png");
+	SDL_Surface* damagedHealthbarSurface = IMG_Load("ASSETS/DamagedHealthBar.png");
+	SDL_Surface* lowHealthbarSurface = IMG_Load("ASSETS/HeavyDamagedHealthBar.png");
 
 	m_wiresTxt = SDL_CreateTextureFromSurface(renderer, wiresSurface);
 	m_obstacleTextures.push_back(m_wiresTxt);
@@ -129,6 +157,14 @@ void PlayScreen::initSprites(SDL_Renderer *renderer)
 	//
 	m_platformText = SDL_CreateTextureFromSurface(renderer, platformSurface);
 	//
+	m_fullHealth = SDL_CreateTextureFromSurface(renderer, fullHealthSurface);
+	m_damagedHealth = SDL_CreateTextureFromSurface(renderer, damagedHealthbarSurface);
+	m_lowHealth = SDL_CreateTextureFromSurface(renderer, lowHealthbarSurface);
+
+	m_healthbarRect = new SDL_Rect();
+	m_healthbarRect->x = 100; m_healthbarRect->y = 100;
+	m_healthbarRect->w = 500; m_healthbarRect->h = 100;
+
 	m_backgroundPos = new SDL_Rect();
 	m_backgroundPos->x = 0; m_backgroundPos->y = 0;
 	m_backgroundPos->w = 1920; m_backgroundPos->h = 1080;
@@ -141,18 +177,26 @@ void PlayScreen::initSprites(SDL_Renderer *renderer)
 
 void PlayScreen::createObstacle(SDL_Rect* rect)
 {
-	Entity* m_obstacle = new Entity();
-	PositionComponent* obsPos = new PositionComponent(Vector2(rect->x, rect->y), 1);
+	Entity* obstacle = new Entity();
 
 	int randNum = rand() % m_obstacleTextures.size();
 
+	if (randNum == 2)
+	{
+		rect->h = 75;
+		rect->y += 25;
+	}
+
+	PositionComponent* obsPos = new PositionComponent(Vector2(rect->x, rect->y), 1);
+
 	SpriteComponent* spriteComponent = new SpriteComponent(m_obstacleTextures[randNum], rect, 2);
 
-	m_obstacle->addComponent<PositionComponent>(obsPos, 1);
-	m_obstacle->addComponent<SpriteComponent>(spriteComponent, 2);
+	obstacle->addComponent<PositionComponent>(obsPos, 1);
+	obstacle->addComponent<SpriteComponent>(spriteComponent, 2);
 
-	m_rs->addEntity(m_obstacle);
-	m_nonPlayerMovementSystem->addEntity(m_obstacle);
+	m_nonPlayerMovementSystem->addEntity(obstacle);
+
+	m_obstacles.push_back(obstacle);
 }
 
 void PlayScreen::createCoin(SDL_Rect* rect)
@@ -191,8 +235,9 @@ void PlayScreen::createCoin(SDL_Rect* rect)
 
 	PositionComponent* pc = new PositionComponent(Vector2(rect->x, rect->y), 1);
 	m_coin->addComponent<PositionComponent>(pc, 1);
-	m_rs->addEntity(m_coin);
 	m_nonPlayerMovementSystem->addEntity(m_coin);
+
+	m_coins.push_back(m_coin);
 }
 
 void PlayScreen::createPlatform(SDL_Rect* rect)
@@ -209,4 +254,147 @@ void PlayScreen::createPlatform(SDL_Rect* rect)
 	m_rs->addEntity(platform);
 	m_nonPlayerMovementSystem->addEntity(platform);
 	m_platforms.push_back(platform);
+}
+
+void PlayScreen::createWave(int type)
+{
+	switch (type)
+	{
+	case 1:
+	{
+		SDL_Rect * c1coinRect = new SDL_Rect();
+		c1coinRect->x = 1920; c1coinRect->y = 830;
+		c1coinRect->w = 70; c1coinRect->h = 70;
+		createCoin(c1coinRect);
+
+		SDL_Rect* c1plRect = new SDL_Rect();
+		c1plRect->x = 2220; c1plRect->y = 680;
+		c1plRect->w = 500; c1plRect->h = 50;
+		createPlatform(c1plRect);
+
+		SDL_Rect* c1obsrect = new SDL_Rect();
+		c1obsrect->x = 2420; c1obsrect->y = 580;
+		c1obsrect->w = 100; c1obsrect->h = 100;
+		createObstacle(c1obsrect);
+
+		SDL_Rect* c1obsrect2 = new SDL_Rect();
+		c1obsrect2->x = 3050; c1obsrect2->y = 830;
+		c1obsrect2->w = 100; c1obsrect2->h = 100;
+		createObstacle(c1obsrect2);
+		break;
+	}
+	
+	case 2:
+	{
+		SDL_Rect * c2plRect = new SDL_Rect();
+		c2plRect->x = 1920; c2plRect->y = 680;
+		c2plRect->w = 600; c2plRect->h = 50;
+		createPlatform(c2plRect);
+
+
+		SDL_Rect * c2plRect2 = new SDL_Rect();
+		c2plRect2->x = 2920; c2plRect2->y = 680;
+		c2plRect2->w = 600; c2plRect2->h = 50;
+		createPlatform(c2plRect2);
+
+		SDL_Rect * c2coinRect = new SDL_Rect();
+		c2coinRect->x = 1920; c2coinRect->y = 830;
+		c2coinRect->w = 70; c2coinRect->h = 70;
+		createCoin(c2coinRect);
+
+		SDL_Rect * c2coinRect2 = new SDL_Rect();
+		c2coinRect2->x = 2220; c2coinRect2->y = 580;
+		c2coinRect2->w = 70; c2coinRect2->h = 70;
+		createCoin(c2coinRect2);
+
+		SDL_Rect* c2obsrect = new SDL_Rect();
+		c2obsrect->x = 2420; c2obsrect->y = 580;
+		c2obsrect->w = 100; c2obsrect->h = 100;
+		createObstacle(c2obsrect);
+
+		SDL_Rect* c2obsrect2 = new SDL_Rect();
+		c2obsrect2->x = 2920; c2obsrect2->y = 830;
+		c2obsrect2->w = 100; c2obsrect2->h = 100;
+		createObstacle(c2obsrect2);
+		break;
+	}
+
+	case 3:
+	{
+		SDL_Rect * c3plRect = new SDL_Rect();
+		c3plRect->x = 2320; c3plRect->y = 680;
+		c3plRect->w = 600; c3plRect->h = 50;
+		createPlatform(c3plRect);
+
+		SDL_Rect * c3coinRect = new SDL_Rect();
+		c3coinRect->x = 1920; c3coinRect->y = 830;
+		c3coinRect->w = 70; c3coinRect->h = 70;
+		createCoin(c3coinRect);
+
+		SDL_Rect * c3coinRect2 = new SDL_Rect();
+		c3coinRect2->x = 2320; c3coinRect2->y = 580;
+		c3coinRect2->w = 70; c3coinRect2->h = 70;
+		createCoin(c3coinRect2);
+
+		SDL_Rect * c3coinRect3 = new SDL_Rect();
+		c3coinRect3->x = 2720; c3coinRect3->y = 580;
+		c3coinRect3->w = 70; c3coinRect3->h = 70;
+		createCoin(c3coinRect3);
+
+		SDL_Rect * c3coinRect4 = new SDL_Rect();
+		c3coinRect4->x = 3170; c3coinRect4->y = 830;
+		c3coinRect4->w = 70; c3coinRect4->h = 70;
+		createCoin(c3coinRect4);
+
+		SDL_Rect * c3coinRect5 = new SDL_Rect();
+		c3coinRect5->x = 2620; c3coinRect5->y = 830;
+		c3coinRect5->w = 70; c3coinRect5->h = 70;
+		createCoin(c3coinRect5);
+
+		break;
+	}
+	}
+}
+
+void PlayScreen::collisionsAndClearing()
+{
+	for (int i = 0; i < m_platforms.size(); i++)
+	{
+		if (m_cs->intersectRect(m_player, m_platforms[i]) == true)
+		{
+			m_js.setGrounded(true);
+			m_player->getComponent<PositionComponent>(1)->setPosition(Vector2(m_player->getComponent<PositionComponent>(1)->getPosition().x,
+				(m_platforms[i]->getComponent<SpriteComponent>(2)->getRect()->y - m_player->getComponent<SpriteComponent>(2)->getRect()->h) - 1));
+		}
+	}
+
+	for (int i = 0; i < m_coins.size(); i++)
+	{
+		if (m_cs->intersectRect(m_player, m_coins[i]) == true)
+		{
+			m_score += m_coins[i]->getComponent<CoinComponent>(3)->getScore();
+
+			std::cout << "Score: " + std::to_string(m_score) << std::endl;
+
+			m_coins[i] = nullptr;
+			m_coins.erase(m_coins.begin() + i);
+			i--;
+
+		}
+	}
+
+	for (int i = 0; i < m_obstacles.size(); i++)
+	{
+		if (m_cs->intersectRect(m_player, m_obstacles[i]))
+		{
+			m_lives -= 1;
+		}
+
+		if (m_obstacles[i]->getComponent<PositionComponent>(1)->getPosition().x + m_obstacles[i]->getComponent<SpriteComponent>(2)->getRect()->w < 0 || m_cs->intersectRect(m_player, m_obstacles[i]))
+		{
+			m_obstacles[i] = nullptr;
+			m_obstacles.erase(m_obstacles.begin() + i);
+			i--;
+		}
+	}
 }

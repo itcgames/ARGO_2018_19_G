@@ -129,7 +129,6 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="HelpScreen.cpp" />
     <ClCompile Include="LicenceScreen.cpp" />
-    <ClCompile Include="LTimer.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenuScene.cpp" />
     <ClCompile Include="MenuManager.cpp" />
@@ -151,7 +150,6 @@
     <ClInclude Include="HelpScreen.h" />
     <ClInclude Include="JumpingSystem.h" />
     <ClInclude Include="LicenceScreen.h" />
-    <ClInclude Include="LTimer.h" />
     <ClInclude Include="MainMenuScene.h" />
     <ClInclude Include="MenuManager.h" />
     <ClInclude Include="NonPlayerMovementSystem.h" />

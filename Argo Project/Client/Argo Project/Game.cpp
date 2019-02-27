@@ -72,7 +72,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 		m_playScreen = new PlayScreen(renderer);
 
 		m_isRunning = true;
-		m_currentGamestate = GameState::Licence;
+		m_currentGamestate = GameState::Play;
 	}
 
 	//
@@ -164,7 +164,7 @@ void Game::update(float deltaTime)
 		}
 		case GameState::Play:
 		{
-			m_playScreen->update(&m_currentGamestate, deltaTime);
+			m_playScreen->update(&m_currentGamestate, deltaTime, renderer);
 			break;
 		}
 	}
