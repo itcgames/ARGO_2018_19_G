@@ -33,6 +33,23 @@ public:
 		return collide;
 	}
 
+	bool decisionPointIntersect(Entity* ai, Entity* node)
+	{
+		bool collide = false;
+		//
+
+		SDL_Point* point = new SDL_Point();
+		point->x = node->getComponent<PositionComponent>(1)->getPosition().x; point->y = node->getComponent<PositionComponent>(1)->getPosition().y;
+
+		//if (SDL_PointInRect(point, ai->getComponent<SpriteComponent>(2)->getRect()) == true)
+		//{
+		//	//std::cout << "Collide" << std::endl;
+		//	collide = true;
+		//}
+
+		return collide;
+	}
+
 	//
 	bool platformCollisionSide(Entity* player, Entity* object)
 	{

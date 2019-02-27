@@ -26,17 +26,25 @@ void PlayScreen::initialise(SDL_Renderer* renderer)
 	m_cs = new CollisionSystem();
 
 	m_player = new Entity();
+	m_ai = new Entity();
 	m_groundPlatform = new Entity();
 	m_pc = new PositionComponent(Vector2(m_playerRect->x, m_playerRect->y), 1);
 	m_sc = new SpriteComponent(m_playerTxt, m_playerRect, 2);
+	PositionComponent* aiPos = new PositionComponent(Vector2(m_aiRect->x, m_aiRect->y), 1);
+	SpriteComponent* aiSprite = new SpriteComponent(m_aiTxt, m_aiRect, 2);
 
 	m_player->addComponent<PositionComponent>(m_pc, 1);
 	m_player->addComponent<SpriteComponent>(m_sc, 2);
+	m_ai->addComponent<PositionComponent>(aiPos, 1);
+	m_ai->addComponent<SpriteComponent>(aiSprite, 2);
+
+	m_rs->addEntity(m_ai);
 	m_rs->addEntity(m_player);
 	m_js.addEntity(m_player);
 
 	m_nonPlayerMovementSystem = new NonPlayerMovementSystem();
-
+	m_decisionNodeSystem = new DecisionNodeSystem();
+	
 	SDL_Rect* ground = new SDL_Rect();
 	ground->x = 0; ground->y = 930;
 	ground->w = 1920; ground->h = 50;
@@ -71,13 +79,15 @@ void PlayScreen::update(GameState* gameState, float deltaTime, SDL_Renderer* ren
 	{
 		int randNum = rand() % 3 + 1;
 
-		createWave(randNum);
+		createWave(1);
 		m_waveInterval = 0;
 	}
 
 	collisionsAndClearing();
 
 	m_nonPlayerMovementSystem->update(deltaTime);
+
+	m_decisionNodeSystem->update(deltaTime);
 
 	m_playerRect->y = m_player->getComponent<PositionComponent>(1)->getPosition().y;
 
@@ -128,6 +138,7 @@ void PlayScreen::initSprites(SDL_Renderer *renderer)
 	//
 	SDL_Surface* backgroundSurface = IMG_Load("ASSETS/8.png");
 	SDL_Surface* playerSurface = IMG_Load("resources/Player.png");
+	SDL_Surface* aiSurface = IMG_Load("resources/AI.png");
 	//
 	SDL_Surface* coinOneSurface = IMG_Load("resources/SmallCoin.png");
 	SDL_Surface* coinTwoSurface = IMG_Load("resources/LargeCoin.png");
@@ -155,6 +166,7 @@ void PlayScreen::initSprites(SDL_Renderer *renderer)
 
 	m_backgroundTxt = SDL_CreateTextureFromSurface(renderer, backgroundSurface);
 	m_playerTxt = SDL_CreateTextureFromSurface(renderer, playerSurface);
+	m_aiTxt = SDL_CreateTextureFromSurface(renderer, aiSurface);
 	//
 	m_coinTxtOne = SDL_CreateTextureFromSurface(renderer, coinOneSurface);
 	m_coinTxtTwo = SDL_CreateTextureFromSurface(renderer, coinTwoSurface);
@@ -177,6 +189,10 @@ void PlayScreen::initSprites(SDL_Renderer *renderer)
 	m_playerRect = new SDL_Rect();
 	m_playerRect->x = 100; m_playerRect->y = 770;
 	m_playerRect->w = 100; m_playerRect->h = 150;
+
+	m_aiRect = new SDL_Rect();
+	m_aiRect->x = 300; m_aiRect->y = 770;
+	m_aiRect->w = 100; m_aiRect->h = 150;
 }
 
 
@@ -262,6 +278,21 @@ void PlayScreen::createPlatform(SDL_Rect* rect)
 	m_platforms.push_back(platform);
 }
 
+void PlayScreen::createDecisionNode(SDL_Point* point)
+{
+	Entity* node = new Entity();
+
+	PositionComponent* pc = new PositionComponent(Vector2(point->x, point->y), 1);
+
+	node->addComponent<PositionComponent>(pc, 1);
+
+	m_decisionNodeSystem->addEntity(node);
+
+	m_decisionNodes.push_back(node);
+
+	std::cout << "node created" << std::endl;
+}
+
 void PlayScreen::createWave(int type)
 {
 	switch (type)
@@ -278,10 +309,18 @@ void PlayScreen::createWave(int type)
 		c1plRect->w = 500; c1plRect->h = 50;
 		createPlatform(c1plRect);
 
+		SDL_Point* c1node1Point = new SDL_Point();
+		c1node1Point->x = 2350; c1node1Point->y = 580;
+		createDecisionNode(c1node1Point);
+
 		SDL_Rect* c1obsrect = new SDL_Rect();
 		c1obsrect->x = 2420; c1obsrect->y = 580;
 		c1obsrect->w = 100; c1obsrect->h = 100;
 		createObstacle(c1obsrect);
+
+		SDL_Point* c1node1Point2 = new SDL_Point();
+		c1node1Point2->x = 2950; c1node1Point2->y = 830;
+		createDecisionNode(c1node1Point2);
 
 		SDL_Rect* c1obsrect2 = new SDL_Rect();
 		c1obsrect2->x = 3050; c1obsrect2->y = 830;
@@ -434,6 +473,15 @@ void PlayScreen::collisionsAndClearing()
 			m_obstacles[i] = nullptr;
 			m_obstacles.erase(m_obstacles.begin() + i);
 			i--;
+		}
+	}
+
+	for (int i = 0; i < m_decisionNodes.size(); i++)
+	{
+		//
+		if (m_cs->decisionPointIntersect(m_ai, m_decisionNodes[i]))
+		{
+			std::cout << "colide!" << std::endl;
 		}
 	}
 }
