@@ -22,11 +22,14 @@ public:
 	void createPlatform(SDL_Rect* rect);
 	void createWave(int type);
 	void collisionsAndClearing();
+	void scrollingBackground(float deltaTime);
+
 private:
 	Entity * m_player;
 	SDL_Event m_event;
 
 	SDL_Texture* m_backgroundTxt;
+	SDL_Texture* m_backgroundTxtTwo;
 
 	SDL_Texture* m_playerTxt;
 
@@ -49,6 +52,7 @@ private:
 
 	//
 	SDL_Rect* m_backgroundPos;
+	SDL_Rect* m_backgroundPosTwo;
 	SDL_Rect* m_playerRect;
 
 	//
@@ -70,6 +74,8 @@ private:
 	RenderSystem* m_rs;
 	CollisionSystem* m_cs;
 	NonPlayerMovementSystem* m_nonPlayerMovementSystem;
+
+	float m_scrollSpeed;
 
 	int m_waveInterval;
 

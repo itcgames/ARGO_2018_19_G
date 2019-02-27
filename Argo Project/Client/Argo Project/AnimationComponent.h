@@ -17,7 +17,7 @@
 #define ANIMATIONCOMPONENT_H
 
 //
-enum AnmationType
+enum AnimationType
 {
 	Climbing,
 	Running,
@@ -40,17 +40,17 @@ public:
 	//
 	void setAnimated(bool animated)
 	{
-		
+		m_animated = animated;
 	}
 
 	void setFrames(int frames)
 	{
-		
+		m_frames = frames;
 	}
 
 	void setSpeed(int speed)
 	{
-		
+		m_speed = speed;
 	}
 
 	//
@@ -73,6 +73,8 @@ private:
 	bool m_animated; 
 	int m_frames;
 	int m_speed;
+
+	AnimationType m_animationtype;
 };
 
 #endif // !ANIMATIONCOMPONENT_H

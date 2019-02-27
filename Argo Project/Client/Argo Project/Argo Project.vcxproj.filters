@@ -137,5 +137,8 @@
     <ClInclude Include="AnimationComponent.h">
       <Filter>Header Files\ECS</Filter>
     </ClInclude>
+    <ClInclude Include="AnimationSystem.h">
+      <Filter>Header Files\ECS</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

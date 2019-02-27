@@ -14,7 +14,7 @@ PlayScreen::~PlayScreen()
 
 void PlayScreen::initialise(SDL_Renderer* renderer)
 {
-
+	m_scrollSpeed = 1;
 	m_score = 0;
 
 	initSprites(renderer);
@@ -64,6 +64,7 @@ void PlayScreen::initialise(SDL_Renderer* renderer)
 
 void PlayScreen::update(GameState* gameState, float deltaTime, SDL_Renderer* renderer)
 {
+	//scrollingBackground(deltaTime);
 	m_js.update(deltaTime);
 
 	m_waveInterval++;
@@ -102,6 +103,7 @@ void PlayScreen::update(GameState* gameState, float deltaTime, SDL_Renderer* ren
 void PlayScreen::render(SDL_Renderer *renderer)
 {
 	SDL_RenderCopy(renderer, m_backgroundTxt, NULL, m_backgroundPos);
+	SDL_RenderCopy(renderer, m_backgroundTxtTwo, NULL, m_backgroundPosTwo);
 
 	SDL_RenderCopy(renderer, m_activeHealth, NULL, m_healthbarRect);
 
@@ -123,6 +125,7 @@ void PlayScreen::initSprites(SDL_Renderer *renderer)
 {
 	//
 	SDL_Surface* backgroundSurface = IMG_Load("ASSETS/8.png");
+	SDL_Surface* backgroundSurfaceTwo = IMG_Load("ASSETS/8.png");
 	SDL_Surface* playerSurface = IMG_Load("resources/Player.png");
 	//
 	SDL_Surface* coinOneSurface = IMG_Load("resources/SmallCoin.png");
@@ -150,6 +153,7 @@ void PlayScreen::initSprites(SDL_Renderer *renderer)
 	m_obstacleTextures.push_back(m_splintersTxt);
 
 	m_backgroundTxt = SDL_CreateTextureFromSurface(renderer, backgroundSurface);
+	m_backgroundTxtTwo = SDL_CreateTextureFromSurface(renderer, backgroundSurfaceTwo);
 	m_playerTxt = SDL_CreateTextureFromSurface(renderer, playerSurface);
 	//
 	m_coinTxtOne = SDL_CreateTextureFromSurface(renderer, coinOneSurface);
@@ -165,10 +169,14 @@ void PlayScreen::initSprites(SDL_Renderer *renderer)
 	m_healthbarRect = new SDL_Rect();
 	m_healthbarRect->x = 100; m_healthbarRect->y = 100;
 	m_healthbarRect->w = 500; m_healthbarRect->h = 100;
-
+	//
 	m_backgroundPos = new SDL_Rect();
 	m_backgroundPos->x = 0; m_backgroundPos->y = 0;
 	m_backgroundPos->w = 1920; m_backgroundPos->h = 1080;
+	//
+	m_backgroundPosTwo = new SDL_Rect();
+	m_backgroundPosTwo->x = 1800; m_backgroundPosTwo->y = 0;
+	m_backgroundPosTwo->w = 1920; m_backgroundPosTwo->h = 1080;
 	//
 	m_playerRect = new SDL_Rect();
 	m_playerRect->x = 100; m_playerRect->y = 770;
@@ -412,5 +420,23 @@ void PlayScreen::collisionsAndClearing()
 			m_obstacles.erase(m_obstacles.begin() + i);
 			i--;
 		}
+	}
+}
+
+//
+void PlayScreen::scrollingBackground(float deltaTime)
+{
+	m_backgroundPos->x -= (m_scrollSpeed * deltaTime);
+	//m_backgroundPosTwo->x -= (m_scrollSpeed);
+
+	//
+	if (m_backgroundPos->x < -1920)
+	{
+		m_backgroundPos->x = 1920;
+	}
+	//
+	if (m_backgroundPosTwo->x < -1920)
+	{
+		m_backgroundPosTwo->x = 1920;
 	}
 }

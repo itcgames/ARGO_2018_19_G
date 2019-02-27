@@ -21,7 +21,7 @@ int main()
 {
 	srand(time(NULL));
 	Game* game = new Game();
-	game->init("SDL", 0, 0, 1900, 1000, false);
+	game->init("SDL", 0, 0, 1800, 1000, false);
 
 
 	game->run();
