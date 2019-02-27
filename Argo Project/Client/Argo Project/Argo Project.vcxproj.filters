@@ -134,5 +134,8 @@
     <ClInclude Include="NonPlayerMovementSystem.h">
       <Filter>Header Files\ECS</Filter>
     </ClInclude>
+    <ClInclude Include="AnimationComponent.h">
+      <Filter>Header Files\ECS</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

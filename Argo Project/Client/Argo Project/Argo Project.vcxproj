@@ -138,6 +138,7 @@
     <ClCompile Include="SplashScreen.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AnimationComponent.h" />
     <ClInclude Include="BaseSystem.h" />
     <ClInclude Include="CoinComponent.h" />
     <ClInclude Include="CollisionComponent.h" />
