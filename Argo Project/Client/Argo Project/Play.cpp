@@ -51,7 +51,6 @@ void PlayScreen::initialise(SDL_Renderer* renderer)
 	m_groundPlatform->addComponent<PositionComponent>(pc, 1);
 	m_groundPlatform->addComponent<SpriteComponent>(sc, 2);
 	m_rs->addEntity(m_groundPlatform);
-	//m_platforms.push_back(groundPlatform);
 
 	int ran = rand() % 3 + 1;
 	createWave(ran);
@@ -113,6 +112,11 @@ void PlayScreen::render(SDL_Renderer *renderer)
 	for (int i = 0; i < m_obstacles.size(); i++)
 	{
 		m_rs->renderImage(renderer, m_obstacles[i]->getComponent<SpriteComponent>(2));
+	}
+
+	for (int i = 0; i < m_platforms.size(); i++)
+	{
+		m_rs->renderImage(renderer, m_platforms[i]->getComponent<SpriteComponent>(2));
 	}
 
 	m_rs->render(renderer);
@@ -252,8 +256,9 @@ void PlayScreen::createPlatform(SDL_Rect* rect)
 	//
 	platform->addComponent<PositionComponent>(pc, 1);
 	platform->addComponent<SpriteComponent>(sc, 2);
-	m_rs->addEntity(platform);
+
 	m_nonPlayerMovementSystem->addEntity(platform);
+
 	m_platforms.push_back(platform);
 }
 
@@ -314,7 +319,7 @@ void PlayScreen::createWave(int type)
 		createObstacle(c2obsrect);
 
 		SDL_Rect* c2obsrect2 = new SDL_Rect();
-		c2obsrect2->x = 2920; c2obsrect2->y = 830;
+		c2obsrect2->x = 3420; c2obsrect2->y = 580;
 		c2obsrect2->w = 100; c2obsrect2->h = 100;
 		createObstacle(c2obsrect2);
 		break;
@@ -337,10 +342,10 @@ void PlayScreen::createWave(int type)
 		c3coinRect2->w = 70; c3coinRect2->h = 70;
 		createCoin(c3coinRect2);
 
-		SDL_Rect * c3coinRect3 = new SDL_Rect();
-		c3coinRect3->x = 2720; c3coinRect3->y = 580;
-		c3coinRect3->w = 70; c3coinRect3->h = 70;
-		createCoin(c3coinRect3);
+		SDL_Rect * c3obsRect = new SDL_Rect();
+		c3obsRect->x = 2720; c3obsRect->y = 580;
+		c3obsRect->w = 100; c3obsRect->h = 100;
+		createObstacle(c3obsRect);
 
 		SDL_Rect * c3coinRect4 = new SDL_Rect();
 		c3coinRect4->x = 3170; c3coinRect4->y = 830;
@@ -382,20 +387,38 @@ void PlayScreen::collisionsAndClearing()
 			m_js.setGrounded(false);
 		}
 
+		if (m_platforms[i]->getComponent<PositionComponent>(1)->getPosition().x + m_platforms[i]->getComponent<SpriteComponent>(2)->getRect()->w < 0)
+		{
+			m_platforms[i] = nullptr;
+			m_platforms.erase(m_platforms.begin() + i);
+			i--;
+		}
+
+
 	}
 
 	for (int i = 0; i < m_coins.size(); i++)
 	{
+		bool destroy = false;
 		if (m_cs->intersectRect(m_player, m_coins[i]) == true)
 		{
 			m_score += m_coins[i]->getComponent<CoinComponent>(3)->getScore();
 
 			std::cout << "Score: " + std::to_string(m_score) << std::endl;
 
+			destroy = true;
+		}
+
+		if (m_coins[i]->getComponent<PositionComponent>(1)->getPosition().x + m_coins[i]->getComponent<SpriteComponent>(2)->getRect()->w < 0)
+		{
+			destroy = true;
+		}
+
+		if (destroy)
+		{
 			m_coins[i] = nullptr;
 			m_coins.erase(m_coins.begin() + i);
 			i--;
-
 		}
 	}
 

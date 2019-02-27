@@ -153,7 +153,7 @@ private:
 	float m_velY, m_newY;
 	float m_gravity = -3.5;
 	float m_maxHeight = 0.0f;
-	float m_speed = 15.0f;
+	float m_speed = 20.0f;
 
 	bool m_grounded = true, m_jump = false, m_up = false, m_down = false;
 };
