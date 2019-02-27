@@ -26,6 +26,7 @@ void PlayScreen::initialise(SDL_Renderer* renderer)
 	m_cs = new CollisionSystem();
 
 	m_player = new Entity();
+	m_groundPlatform = new Entity();
 	m_pc = new PositionComponent(Vector2(m_playerRect->x, m_playerRect->y), 1);
 	m_sc = new SpriteComponent(m_playerTxt, m_playerRect, 2);
 
@@ -47,10 +48,10 @@ void PlayScreen::initialise(SDL_Renderer* renderer)
 	m_plc = new PlatformComponent(m_platformText, ground, 4);
 	SpriteComponent* sc = new SpriteComponent(m_platformText, ground, 2);
 	//
-	groundPlatform->addComponent<PositionComponent>(pc, 1);
-	groundPlatform->addComponent<SpriteComponent>(sc, 2);
-	m_rs->addEntity(groundPlatform);
-	m_platforms.push_back(groundPlatform);
+	m_groundPlatform->addComponent<PositionComponent>(pc, 1);
+	m_groundPlatform->addComponent<SpriteComponent>(sc, 2);
+	m_rs->addEntity(m_groundPlatform);
+	//m_platforms.push_back(groundPlatform);
 
 	int ran = rand() % 3 + 1;
 	createWave(ran);
@@ -360,12 +361,27 @@ void PlayScreen::collisionsAndClearing()
 {
 	for (int i = 0; i < m_platforms.size(); i++)
 	{
-		if (m_cs->intersectRect(m_player, m_platforms[i]) == true)
+		//
+		if (m_cs->intersectRect(m_player, m_groundPlatform) == true)
+		{
+			m_js.setGrounded(true);
+			m_player->getComponent<PositionComponent>(1)->setPosition(Vector2(m_player->getComponent<PositionComponent>(1)->getPosition().x,
+				(m_groundPlatform->getComponent<SpriteComponent>(2)->getRect()->y - m_player->getComponent<SpriteComponent>(2)->getRect()->h) - 1));
+		}
+
+		else if (m_cs->intersectRect(m_player, m_platforms[i]) == true)
 		{
 			m_js.setGrounded(true);
 			m_player->getComponent<PositionComponent>(1)->setPosition(Vector2(m_player->getComponent<PositionComponent>(1)->getPosition().x,
 				(m_platforms[i]->getComponent<SpriteComponent>(2)->getRect()->y - m_player->getComponent<SpriteComponent>(2)->getRect()->h) - 1));
 		}
+
+		if (m_player->getComponent<PositionComponent>(1)->getPosition().y < 480 &&
+			m_player->getComponent<PositionComponent>(1)->getPosition().x > m_platforms[i]->getComponent<SpriteComponent>(2)->getRect()->x + m_platforms[i]->getComponent<SpriteComponent>(2)->getRect()->w)
+		{
+			m_js.setGrounded(false);
+		}
+
 	}
 
 	for (int i = 0; i < m_coins.size(); i++)

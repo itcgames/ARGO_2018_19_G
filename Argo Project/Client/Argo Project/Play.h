@@ -56,6 +56,8 @@ private:
 	std::vector<Entity*> m_obstacles;
 	std::vector<Entity*> m_platforms;
 	std::vector<Entity*> m_coins;
+	//
+	Entity* m_groundPlatform;
 
 	//
 	PositionComponent* m_pc;
