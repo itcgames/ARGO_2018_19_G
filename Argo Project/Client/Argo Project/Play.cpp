@@ -14,6 +14,9 @@ PlayScreen::~PlayScreen()
 
 void PlayScreen::initialise(SDL_Renderer* renderer)
 {
+
+	m_score = 0;
+
 	initSprites(renderer);
 	m_obstacles.clear();
 	m_coins.clear();
@@ -53,7 +56,6 @@ void PlayScreen::initialise(SDL_Renderer* renderer)
 	createWave(ran);
 
 	m_waveInterval = 0;
-	m_score = 0;
 
 	m_lives = 3;
 	m_activeHealth = m_fullHealth;
@@ -136,8 +138,6 @@ void PlayScreen::initSprites(SDL_Renderer *renderer)
 	SDL_Surface* fullHealthSurface = IMG_Load("ASSETS/FullHealthBar.png");
 	SDL_Surface* damagedHealthbarSurface = IMG_Load("ASSETS/DamagedHealthBar.png");
 	SDL_Surface* lowHealthbarSurface = IMG_Load("ASSETS/HeavyDamagedHealthBar.png");
-
-
 
 	m_wiresTxt = SDL_CreateTextureFromSurface(renderer, wiresSurface);
 	m_obstacleTextures.push_back(m_wiresTxt);
@@ -373,9 +373,13 @@ void PlayScreen::collisionsAndClearing()
 		if (m_cs->intersectRect(m_player, m_coins[i]) == true)
 		{
 			m_score += m_coins[i]->getComponent<CoinComponent>(3)->getScore();
+
+			std::cout << "Score: " + std::to_string(m_score) << std::endl;
+
 			m_coins[i] = nullptr;
 			m_coins.erase(m_coins.begin() + i);
 			i--;
+
 		}
 	}
 

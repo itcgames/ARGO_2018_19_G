@@ -1,7 +1,6 @@
 #pragma once
 #include <SDL.h>
 #include <SDL_image.h>
-#include <SDL_ttf.h>
 #include <iostream>
 
 #include "MenuManager.h"
@@ -48,8 +47,6 @@ private:
 	SDL_Texture* m_lowHealth;
 	SDL_Rect* m_healthbarRect;
 
-	SDL_Texture* m_scoreTxt;
-	SDL_Rect* m_scorePos;
 	//
 	SDL_Rect* m_backgroundPos;
 	SDL_Rect* m_playerRect;
