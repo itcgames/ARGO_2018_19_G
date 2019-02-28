@@ -44,7 +44,10 @@ void PlayScreen::initialise(SDL_Renderer* renderer)
 
 	m_nonPlayerMovementSystem = new NonPlayerMovementSystem();
 	m_decisionNodeSystem = new DecisionNodeSystem();
-	
+	m_aiJumpingSystem = new AIJumpingSystem();
+
+	m_aiJumpingSystem->addEntity(m_ai);
+
 	SDL_Rect* ground = new SDL_Rect();
 	ground->x = 0; ground->y = 930;
 	ground->w = 1920; ground->h = 50;
@@ -89,8 +92,10 @@ void PlayScreen::update(GameState* gameState, float deltaTime, SDL_Renderer* ren
 
 	m_decisionNodeSystem->update(deltaTime);
 
-	m_playerRect->y = m_player->getComponent<PositionComponent>(1)->getPosition().y;
+	m_aiJumpingSystem->update(deltaTime);
 
+	m_playerRect->y = m_player->getComponent<PositionComponent>(1)->getPosition().y;
+	m_aiRect->y = m_ai->getComponent<PositionComponent>(1)->getPosition().y;
 	switch (m_lives)
 	{
 	case 2: 
@@ -426,14 +431,32 @@ void PlayScreen::collisionsAndClearing()
 			m_js.setGrounded(false);
 		}
 
+		if (m_cs->intersectRect(m_ai, m_groundPlatform) == true)
+		{
+			m_aiJumpingSystem->setGrounded(true);
+			m_ai->getComponent<PositionComponent>(1)->setPosition(Vector2(m_ai->getComponent<PositionComponent>(1)->getPosition().x,
+				(m_groundPlatform->getComponent<SpriteComponent>(2)->getRect()->y - m_ai->getComponent<SpriteComponent>(2)->getRect()->h) - 1));
+		}
+
+		else if (m_cs->intersectRect(m_ai, m_platforms[i]) == true)
+		{
+			m_aiJumpingSystem->setGrounded(true);
+			m_player->getComponent<PositionComponent>(1)->setPosition(Vector2(m_ai->getComponent<PositionComponent>(1)->getPosition().x,
+				(m_platforms[i]->getComponent<SpriteComponent>(2)->getRect()->y - m_ai->getComponent<SpriteComponent>(2)->getRect()->h) - 1));
+		}
+
+		if (m_ai->getComponent<PositionComponent>(1)->getPosition().y < 480 &&
+			m_ai->getComponent<PositionComponent>(1)->getPosition().x > m_platforms[i]->getComponent<SpriteComponent>(2)->getRect()->x + m_platforms[i]->getComponent<SpriteComponent>(2)->getRect()->w)
+		{
+			m_aiJumpingSystem->setGrounded(false);
+		}
+
 		if (m_platforms[i]->getComponent<PositionComponent>(1)->getPosition().x + m_platforms[i]->getComponent<SpriteComponent>(2)->getRect()->w < 0)
 		{
 			m_platforms[i] = nullptr;
 			m_platforms.erase(m_platforms.begin() + i);
 			i--;
 		}
-
-
 	}
 
 	for (int i = 0; i < m_coins.size(); i++)
@@ -481,7 +504,8 @@ void PlayScreen::collisionsAndClearing()
 		//
 		if (m_cs->decisionPointIntersect(m_ai, m_decisionNodes[i]))
 		{
-			std::cout << "colide!" << std::endl;
+
+			m_aiJumpingSystem->setJump(true);
 		}
 	}
 }

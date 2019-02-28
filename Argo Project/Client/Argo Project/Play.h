@@ -75,6 +75,7 @@ private:
 	CollisionSystem* m_cs;
 	NonPlayerMovementSystem* m_nonPlayerMovementSystem;
 	DecisionNodeSystem* m_decisionNodeSystem;
+	AIJumpingSystem* m_aiJumpingSystem;
 
 	int m_waveInterval;
 

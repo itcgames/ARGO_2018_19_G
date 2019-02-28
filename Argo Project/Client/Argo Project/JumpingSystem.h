@@ -93,11 +93,6 @@ public:
 
 			if (m_jump == true)
 			{
-				//m_position.y + ((m_velocity.y * deltaTime.asSeconds()) + (0.5 * m_gravity.y) * (deltaTime.asSeconds() * deltaTime.asSeconds()))
-				//m_velY -= m_gravity * deltaTime;
-				//m_newY -= m_velY;
-				//m_newY += ((m_velY * deltaTime) + ((0.5 * m_gravity) * (deltaTime * deltaTime)));
-
 				//
 				if (m_up == true)
 				{
