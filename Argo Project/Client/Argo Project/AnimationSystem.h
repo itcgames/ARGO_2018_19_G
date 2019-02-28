@@ -25,6 +25,20 @@ public:
 	{
 		if (player->getComponent<AnimationComponent>(5)->getAnimated() == true)
 		{
+			if (player->getComponent<AnimationComponent>(5)->getAnimationType() == AnimationType::Climbing)
+			{
+
+			}
+
+			else if (player->getComponent<AnimationComponent>(5)->getAnimationType() == AnimationType::Running)
+			{
+
+			}
+
+			else if (player->getComponent<AnimationComponent>(5)->getAnimationType() == AnimationType::Jumping)
+			{
+
+			}
 
 		}
 	}
