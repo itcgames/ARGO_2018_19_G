@@ -22,4 +22,6 @@
 #include "JumpingSystem.h"
 #include "CollisionSystem.h"
 #include "NonPlayerMovementSystem.h"
+#include "DecisionNodeSystem.h"
+#include "AIJumpingSystem.h"
 #endif //! ECS_H

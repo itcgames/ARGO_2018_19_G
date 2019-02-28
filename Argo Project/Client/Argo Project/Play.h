@@ -20,15 +20,18 @@ public:
 	void createObstacle(SDL_Rect* rect);
 	void createCoin(SDL_Rect* rect);
 	void createPlatform(SDL_Rect* rect);
+	void createDecisionNode(SDL_Point* point);
 	void createWave(int type);
 	void collisionsAndClearing();
 private:
 	Entity * m_player;
+	Entity* m_ai;
 	SDL_Event m_event;
 
 	SDL_Texture* m_backgroundTxt;
 
 	SDL_Texture* m_playerTxt;
+	SDL_Texture* m_aiTxt;
 
 	SDL_Texture* m_wiresTxt;
 	SDL_Texture* m_thumbtacTxt;
@@ -50,12 +53,13 @@ private:
 	//
 	SDL_Rect* m_backgroundPos;
 	SDL_Rect* m_playerRect;
-
+	SDL_Rect* m_aiRect;
 	//
 	std::vector<SDL_Texture*> m_obstacleTextures;
 	std::vector<Entity*> m_obstacles;
 	std::vector<Entity*> m_platforms;
 	std::vector<Entity*> m_coins;
+	std::vector<Entity*> m_decisionNodes;
 	//
 	Entity* m_groundPlatform;
 
@@ -70,6 +74,8 @@ private:
 	RenderSystem* m_rs;
 	CollisionSystem* m_cs;
 	NonPlayerMovementSystem* m_nonPlayerMovementSystem;
+	DecisionNodeSystem* m_decisionNodeSystem;
+	AIJumpingSystem* m_aiJumpingSystem;
 
 	int m_waveInterval;
 

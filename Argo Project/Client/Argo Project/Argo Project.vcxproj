@@ -138,12 +138,16 @@
     <ClCompile Include="SplashScreen.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AIcomponent.h" />
+    <ClInclude Include="AIJumpingSystem.h" />
     <ClInclude Include="BaseSystem.h" />
     <ClInclude Include="CoinComponent.h" />
     <ClInclude Include="CollisionComponent.h" />
     <ClInclude Include="CollisionSystem.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="CreditsScreen.h" />
+    <ClInclude Include="DecisionNodeComponent.h" />
+    <ClInclude Include="DecisionNodeSystem.h" />
     <ClInclude Include="ECS.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Game.h" />

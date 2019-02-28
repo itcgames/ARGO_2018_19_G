@@ -134,5 +134,17 @@
     <ClInclude Include="NonPlayerMovementSystem.h">
       <Filter>Header Files\ECS</Filter>
     </ClInclude>
+    <ClInclude Include="DecisionNodeComponent.h">
+      <Filter>Header Files\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="DecisionNodeSystem.h">
+      <Filter>Header Files\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="AIcomponent.h">
+      <Filter>Header Files\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="AIJumpingSystem.h">
+      <Filter>Header Files\ECS</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
