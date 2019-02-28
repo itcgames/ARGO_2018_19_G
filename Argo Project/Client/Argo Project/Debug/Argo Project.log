@@ -1,15 +1,4 @@
-﻿  Game.cpp
-c:\users\gameuser\documents\college stuff\argo project\argo_2018_19_g\argo project\client\argo project\rendersystem.h(46): warning C4018: '<': signed/unsigned mismatch
-c:\users\gameuser\documents\college stuff\argo project\argo_2018_19_g\argo project\client\argo project\jumpingsystem.h(40): warning C4018: '<': signed/unsigned mismatch
-c:\users\gameuser\documents\college stuff\argo project\argo_2018_19_g\argo project\client\argo project\collisionsystem.h(27): warning C4805: '==': unsafe mix of type 'SDL_bool' and type 'bool' in operation
-c:\users\gameuser\documents\college stuff\argo project\argo_2018_19_g\argo project\client\argo project\collisionsystem.h(42): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\users\gameuser\documents\college stuff\argo project\argo_2018_19_g\argo project\client\argo project\collisionsystem.h(44): warning C4805: '==': unsafe mix of type 'SDL_bool' and type 'bool' in operation
-c:\users\gameuser\documents\college stuff\argo project\argo_2018_19_g\argo project\client\argo project\nonplayermovementsystem.h(19): warning C4018: '<': signed/unsigned mismatch
-c:\users\gameuser\documents\college stuff\argo project\argo_2018_19_g\argo project\client\argo project\nonplayermovementsystem.h(25): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\users\gameuser\documents\college stuff\argo project\argo_2018_19_g\argo project\client\argo project\decisionnodesystem.h(17): warning C4018: '<': signed/unsigned mismatch
-c:\users\gameuser\documents\college stuff\argo project\argo_2018_19_g\argo project\client\argo project\aijumpingsystem.h(28): warning C4018: '<': signed/unsigned mismatch
-c:\users\gameuser\documents\college stuff\argo project\argo_2018_19_g\argo project\client\argo project\game.cpp(122): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-  Play.cpp
+﻿  Play.cpp
 c:\users\gameuser\documents\college stuff\argo project\argo_2018_19_g\argo project\client\argo project\rendersystem.h(46): warning C4018: '<': signed/unsigned mismatch
 c:\users\gameuser\documents\college stuff\argo project\argo_2018_19_g\argo project\client\argo project\jumpingsystem.h(40): warning C4018: '<': signed/unsigned mismatch
 c:\users\gameuser\documents\college stuff\argo project\argo_2018_19_g\argo project\client\argo project\collisionsystem.h(27): warning C4805: '==': unsafe mix of type 'SDL_bool' and type 'bool' in operation
@@ -31,34 +20,12 @@ c:\users\gameuser\documents\college stuff\argo project\argo_2018_19_g\argo proje
 c:\users\gameuser\documents\college stuff\argo project\argo_2018_19_g\argo project\client\argo project\play.cpp(262): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 c:\users\gameuser\documents\college stuff\argo project\argo_2018_19_g\argo project\client\argo project\play.cpp(273): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 c:\users\gameuser\documents\college stuff\argo project\argo_2018_19_g\argo project\client\argo project\play.cpp(290): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\gameuser\documents\college stuff\argo project\argo_2018_19_g\argo project\client\argo project\play.cpp(411): warning C4018: '<': signed/unsigned mismatch
-c:\users\gameuser\documents\college stuff\argo project\argo_2018_19_g\argo project\client\argo project\play.cpp(418): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\gameuser\documents\college stuff\argo project\argo_2018_19_g\argo project\client\argo project\play.cpp(425): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\gameuser\documents\college stuff\argo project\argo_2018_19_g\argo project\client\argo project\play.cpp(438): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\gameuser\documents\college stuff\argo project\argo_2018_19_g\argo project\client\argo project\play.cpp(445): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\gameuser\documents\college stuff\argo project\argo_2018_19_g\argo project\client\argo project\play.cpp(462): warning C4018: '<': signed/unsigned mismatch
-c:\users\gameuser\documents\college stuff\argo project\argo_2018_19_g\argo project\client\argo project\play.cpp(487): warning C4018: '<': signed/unsigned mismatch
-c:\users\gameuser\documents\college stuff\argo project\argo_2018_19_g\argo project\client\argo project\play.cpp(502): warning C4018: '<': signed/unsigned mismatch
-  Player.cpp
-c:\users\gameuser\documents\college stuff\argo project\argo_2018_19_g\argo project\client\argo project\rendersystem.h(46): warning C4018: '<': signed/unsigned mismatch
-c:\users\gameuser\documents\college stuff\argo project\argo_2018_19_g\argo project\client\argo project\jumpingsystem.h(40): warning C4018: '<': signed/unsigned mismatch
-c:\users\gameuser\documents\college stuff\argo project\argo_2018_19_g\argo project\client\argo project\collisionsystem.h(27): warning C4805: '==': unsafe mix of type 'SDL_bool' and type 'bool' in operation
-c:\users\gameuser\documents\college stuff\argo project\argo_2018_19_g\argo project\client\argo project\collisionsystem.h(42): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\users\gameuser\documents\college stuff\argo project\argo_2018_19_g\argo project\client\argo project\collisionsystem.h(44): warning C4805: '==': unsafe mix of type 'SDL_bool' and type 'bool' in operation
-c:\users\gameuser\documents\college stuff\argo project\argo_2018_19_g\argo project\client\argo project\nonplayermovementsystem.h(19): warning C4018: '<': signed/unsigned mismatch
-c:\users\gameuser\documents\college stuff\argo project\argo_2018_19_g\argo project\client\argo project\nonplayermovementsystem.h(25): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\users\gameuser\documents\college stuff\argo project\argo_2018_19_g\argo project\client\argo project\decisionnodesystem.h(17): warning C4018: '<': signed/unsigned mismatch
-c:\users\gameuser\documents\college stuff\argo project\argo_2018_19_g\argo project\client\argo project\aijumpingsystem.h(28): warning C4018: '<': signed/unsigned mismatch
-  main.cpp
-c:\users\gameuser\documents\college stuff\argo project\argo_2018_19_g\argo project\client\argo project\rendersystem.h(46): warning C4018: '<': signed/unsigned mismatch
-c:\users\gameuser\documents\college stuff\argo project\argo_2018_19_g\argo project\client\argo project\jumpingsystem.h(40): warning C4018: '<': signed/unsigned mismatch
-c:\users\gameuser\documents\college stuff\argo project\argo_2018_19_g\argo project\client\argo project\collisionsystem.h(27): warning C4805: '==': unsafe mix of type 'SDL_bool' and type 'bool' in operation
-c:\users\gameuser\documents\college stuff\argo project\argo_2018_19_g\argo project\client\argo project\collisionsystem.h(42): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\users\gameuser\documents\college stuff\argo project\argo_2018_19_g\argo project\client\argo project\collisionsystem.h(44): warning C4805: '==': unsafe mix of type 'SDL_bool' and type 'bool' in operation
-c:\users\gameuser\documents\college stuff\argo project\argo_2018_19_g\argo project\client\argo project\nonplayermovementsystem.h(19): warning C4018: '<': signed/unsigned mismatch
-c:\users\gameuser\documents\college stuff\argo project\argo_2018_19_g\argo project\client\argo project\nonplayermovementsystem.h(25): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\users\gameuser\documents\college stuff\argo project\argo_2018_19_g\argo project\client\argo project\decisionnodesystem.h(17): warning C4018: '<': signed/unsigned mismatch
-c:\users\gameuser\documents\college stuff\argo project\argo_2018_19_g\argo project\client\argo project\aijumpingsystem.h(28): warning C4018: '<': signed/unsigned mismatch
-c:\users\gameuser\documents\college stuff\argo project\argo_2018_19_g\argo project\client\argo project\main.cpp(22): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  Generating Code...
+c:\users\gameuser\documents\college stuff\argo project\argo_2018_19_g\argo project\client\argo project\play.cpp(427): warning C4018: '<': signed/unsigned mismatch
+c:\users\gameuser\documents\college stuff\argo project\argo_2018_19_g\argo project\client\argo project\play.cpp(434): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\gameuser\documents\college stuff\argo project\argo_2018_19_g\argo project\client\argo project\play.cpp(441): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\gameuser\documents\college stuff\argo project\argo_2018_19_g\argo project\client\argo project\play.cpp(454): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\gameuser\documents\college stuff\argo project\argo_2018_19_g\argo project\client\argo project\play.cpp(461): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\gameuser\documents\college stuff\argo project\argo_2018_19_g\argo project\client\argo project\play.cpp(478): warning C4018: '<': signed/unsigned mismatch
+c:\users\gameuser\documents\college stuff\argo project\argo_2018_19_g\argo project\client\argo project\play.cpp(503): warning C4018: '<': signed/unsigned mismatch
+c:\users\gameuser\documents\college stuff\argo project\argo_2018_19_g\argo project\client\argo project\play.cpp(518): warning C4018: '<': signed/unsigned mismatch
   Argo Project.vcxproj -> C:\Users\gameuser\Documents\college stuff\ARGO Project\ARGO_2018_19_G\Argo Project\Client\Debug\Argo Project.exe

@@ -82,7 +82,7 @@ void PlayScreen::update(GameState* gameState, float deltaTime, SDL_Renderer* ren
 	{
 		int randNum = rand() % 3 + 1;
 
-		createWave(1);
+		createWave(randNum);
 		m_waveInterval = 0;
 	}
 
@@ -295,7 +295,6 @@ void PlayScreen::createDecisionNode(SDL_Point* point)
 
 	m_decisionNodes.push_back(node);
 
-	std::cout << "node created" << std::endl;
 }
 
 void PlayScreen::createWave(int type)
@@ -309,26 +308,34 @@ void PlayScreen::createWave(int type)
 		c1coinRect->w = 70; c1coinRect->h = 70;
 		createCoin(c1coinRect);
 
-		SDL_Rect* c1plRect = new SDL_Rect();
-		c1plRect->x = 2220; c1plRect->y = 680;
-		c1plRect->w = 500; c1plRect->h = 50;
-		createPlatform(c1plRect);
-
 		SDL_Point* c1node1Point = new SDL_Point();
-		c1node1Point->x = 2350; c1node1Point->y = 580;
+		c1node1Point->x = 1970; c1node1Point->y = 830;
 		createDecisionNode(c1node1Point);
 
+		SDL_Rect* c1plRect = new SDL_Rect();
+		c1plRect->x = 2220; c1plRect->y = 680;
+		c1plRect->w = 600; c1plRect->h = 50;
+		createPlatform(c1plRect);
+
+		SDL_Point* c1node1Point2 = new SDL_Point();
+		c1node1Point2->x = 2620; c1node1Point2->y = 580;
+		createDecisionNode(c1node1Point2);
+
 		SDL_Rect* c1obsrect = new SDL_Rect();
-		c1obsrect->x = 2420; c1obsrect->y = 580;
+		c1obsrect->x = 2720; c1obsrect->y = 580;
 		c1obsrect->w = 100; c1obsrect->h = 100;
 		createObstacle(c1obsrect);
 
-		SDL_Point* c1node1Point2 = new SDL_Point();
-		c1node1Point2->x = 2950; c1node1Point2->y = 830;
-		createDecisionNode(c1node1Point2);
+		SDL_Point* c1node1Point3 = new SDL_Point();
+		c1node1Point3->x = 2750; c1node1Point3->y = 580;
+		createDecisionNode(c1node1Point3);
+
+		SDL_Point* c1node1Point4 = new SDL_Point();
+		c1node1Point4->x = 3250; c1node1Point4->y = 830;
+		createDecisionNode(c1node1Point4);
 
 		SDL_Rect* c1obsrect2 = new SDL_Rect();
-		c1obsrect2->x = 3050; c1obsrect2->y = 830;
+		c1obsrect2->x = 3350; c1obsrect2->y = 830;
 		c1obsrect2->w = 100; c1obsrect2->h = 100;
 		createObstacle(c1obsrect2);
 		break;
@@ -336,6 +343,11 @@ void PlayScreen::createWave(int type)
 	
 	case 2:
 	{
+
+		SDL_Point* c2nodePoint = new SDL_Point();
+		c2nodePoint->x = 1750; c2nodePoint->y = 830;
+		createDecisionNode(c2nodePoint);
+
 		SDL_Rect * c2plRect = new SDL_Rect();
 		c2plRect->x = 1920; c2plRect->y = 680;
 		c2plRect->w = 600; c2plRect->h = 50;
@@ -356,6 +368,10 @@ void PlayScreen::createWave(int type)
 		c2coinRect2->x = 2220; c2coinRect2->y = 580;
 		c2coinRect2->w = 70; c2coinRect2->h = 70;
 		createCoin(c2coinRect2);
+
+		SDL_Point* c2nodePoint2 = new SDL_Point();
+		c2nodePoint2->x = 2320; c2nodePoint2->y = 580;
+		createDecisionNode(c2nodePoint2);
 
 		SDL_Rect* c2obsrect = new SDL_Rect();
 		c2obsrect->x = 2420; c2obsrect->y = 580;
@@ -441,7 +457,7 @@ void PlayScreen::collisionsAndClearing()
 		else if (m_cs->intersectRect(m_ai, m_platforms[i]) == true)
 		{
 			m_aiJumpingSystem->setGrounded(true);
-			m_player->getComponent<PositionComponent>(1)->setPosition(Vector2(m_ai->getComponent<PositionComponent>(1)->getPosition().x,
+			m_ai->getComponent<PositionComponent>(1)->setPosition(Vector2(m_ai->getComponent<PositionComponent>(1)->getPosition().x,
 				(m_platforms[i]->getComponent<SpriteComponent>(2)->getRect()->y - m_ai->getComponent<SpriteComponent>(2)->getRect()->h) - 1));
 		}
 
