@@ -18,7 +18,9 @@ private:
 	SDL_Event m_event;
 	SDL_Texture* m_MainMenuButtonTxt;
 	SDL_Texture* m_backgroundTxt;
+	SDL_Texture* m_creditTxt;
 	SDL_Rect* m_mainMenuButtonPos;
 	SDL_Rect* m_backgroundPos;
+	SDL_Rect* m_creditPos;
 };
 

@@ -146,7 +146,7 @@ void Game::update(float deltaTime)
 		}
 		case GameState::Help:
 		{
-			m_helpScreen->update(&m_currentGamestate);
+			m_helpScreen->update(&m_currentGamestate, renderer);
 			break;
 		}
 
