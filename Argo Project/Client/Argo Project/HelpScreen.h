@@ -17,6 +17,8 @@ private:
 	SDL_Point * mousePos;
 	SDL_Event m_event;
 	SDL_Texture* m_MainMenuButtonTxt;
+	SDL_Texture* m_backgroundTxt;
 	SDL_Rect* m_mainMenuButtonPos;
+	SDL_Rect* m_backgroundPos;
 };
 

@@ -1,7 +1,5 @@
 #include "Play.h"
 
-
-
 PlayScreen::PlayScreen(SDL_Renderer* renderer)
 {
 	initialise(renderer);
@@ -14,7 +12,6 @@ PlayScreen::~PlayScreen()
 
 void PlayScreen::initialise(SDL_Renderer* renderer)
 {
-
 	m_score = 0;
 
 	initSprites(renderer);
@@ -136,7 +133,6 @@ void PlayScreen::render(SDL_Renderer *renderer)
 
 	m_rs->render(renderer);
 }
-
 
 void PlayScreen::initSprites(SDL_Renderer *renderer)
 {

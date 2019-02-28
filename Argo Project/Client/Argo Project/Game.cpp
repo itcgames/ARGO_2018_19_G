@@ -49,30 +49,23 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	//
 	if (SDL_Init(SDL_INIT_EVERYTHING) == 0)
 	{
-		std::cout << "Subsystems Initialised!" << std::endl;
-
 		window = SDL_CreateWindow(title, xpos, ypos, width, height, flags);
-		if (window)
-		{
-			std::cout << "Window Created!" << std::endl;
-		}
 
 		renderer = SDL_CreateRenderer(window, -1, 0);
 		if (renderer)
 		{
 			SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-			std::cout << "Renderer created!" << std::endl;
 		}
 
 		m_licenceScreen = new LicenceScreen(renderer);
 		m_splashScreen = new SplashScreen(renderer);
 		m_mainMenuScreen = new MainMenuScreen(renderer);
-		m_optionsScreen = new OptionsScreen(renderer);
 		m_helpScreen = new HelpScreen(renderer);
 		m_playScreen = new PlayScreen(renderer);
+		m_creditScreen = new CreditsScreen(renderer);
 
 		m_isRunning = true;
-		m_currentGamestate = GameState::Play;
+		m_currentGamestate = GameState::Licence;
 	}
 
 	//
@@ -110,7 +103,6 @@ void Game::run()
 
 	while (m_isRunning)
 	{
-
 		m_now = SDL_GetTicks();
 
 		if (m_now > m_last)
@@ -152,16 +144,18 @@ void Game::update(float deltaTime)
 			m_mainMenuScreen->update(&m_currentGamestate);
 			break;
 		}
-		case GameState::Options:
-		{
-			m_optionsScreen->update(&m_currentGamestate);
-			break;
-		}
 		case GameState::Help:
 		{
 			m_helpScreen->update(&m_currentGamestate);
 			break;
 		}
+
+		case GameState::Credits:
+		{
+			m_creditScreen->update(&m_currentGamestate);
+			break;
+		}
+
 		case GameState::Play:
 		{
 			m_playScreen->update(&m_currentGamestate, deltaTime, renderer);
@@ -170,15 +164,11 @@ void Game::update(float deltaTime)
 	}
 }
 
-/// <summary>
-/// 
-/// </summary>
 void Game::render() 
 {
 	SDL_RenderClear(renderer);
 
 	// Drawing occurs here
-
 	switch (m_currentGamestate)
 	{
 		case GameState::Licence:
@@ -196,9 +186,9 @@ void Game::render()
 			m_mainMenuScreen->render(renderer);
 			break;
 		}
-		case GameState::Options:
+		case GameState::Credits:
 		{
-			m_optionsScreen->render(renderer);
+			m_creditScreen->render(renderer);
 			break;
 		}
 		case GameState::Help:
@@ -217,12 +207,8 @@ void Game::render()
 	SDL_RenderPresent(renderer);
 }
 
-/// <summary>
-/// 
-/// </summary>
 void Game::clean()
 {
 	SDL_DestroyWindow(window);
 	SDL_Quit();
-	std::cout << "Game cleaned!" << std::endl;
 }

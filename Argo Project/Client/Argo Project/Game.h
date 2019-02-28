@@ -20,9 +20,9 @@
 #include "LicenceScreen.h"
 #include "SplashScreen.h"
 #include "MainMenuScene.h"
-#include "OptionsScreen.h"
 #include "HelpScreen.h"
 #include "Play.h"
+#include "CreditsScreen.h"
 
 #include "ECS.h"
 
@@ -48,9 +48,9 @@ private:
 	LicenceScreen* m_licenceScreen;
 	SplashScreen* m_splashScreen;
 	MainMenuScreen* m_mainMenuScreen;
-	OptionsScreen* m_optionsScreen;
 	HelpScreen* m_helpScreen;
 	PlayScreen* m_playScreen;
+	CreditsScreen* m_creditScreen;
 
 	SDL_Window *window;
 	bool m_isRunning;

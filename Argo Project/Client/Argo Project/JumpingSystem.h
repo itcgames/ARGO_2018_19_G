@@ -28,13 +28,6 @@ public:
 	}
 
 	//
-	~JumpingSystem()
-	{
-
-	}
-
-
-	//
 	void update(float deltaTime)
 	{
 		for (int i = 0; i < m_entities.size(); i++)
@@ -46,34 +39,6 @@ public:
 				{
 					switch (m_event.key.keysym.sym)
 					{
-					case SDLK_UP:
-						//
-						if (m_jump == false && m_grounded == true)
-						{
-							m_velY = 50;
-							m_newY = 0;
-							m_jump = true;
-							m_grounded = false;
-							m_up = true;
-							m_down = false;
-							m_maxHeight = m_entities[i]->getComponent<PositionComponent>(1)->getPosition().y - 400;
-						}
-
-						break;
-					case SDLK_w:
-						//
-						if (m_jump == false && m_grounded == true)
-						{
-							m_velY = 50;
-							m_newY = 0;
-							m_jump = true;
-							m_grounded = false;
-							m_up = true;
-							m_down = false;
-							m_maxHeight = m_entities[i]->getComponent<PositionComponent>(1)->getPosition().y - 400;
-						}
-
-						break;
 					case SDLK_SPACE:
 						//
 						if (m_jump == false && m_grounded == true)

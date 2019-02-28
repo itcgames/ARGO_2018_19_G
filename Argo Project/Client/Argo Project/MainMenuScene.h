@@ -18,13 +18,13 @@ private:
 	SDL_Point* mouse;
 	SDL_Event m_event;
 	SDL_Texture* m_playTxt;
-	SDL_Texture* m_optionsTxt;
+	SDL_Texture* m_creditsTxt;
 	SDL_Texture* m_helpTxt;
 	SDL_Texture* m_quitTxt;
 	SDL_Texture* m_backgroundTxt;
 	SDL_Rect* m_backgroundPos;
 	SDL_Rect* m_playPos;
-	SDL_Rect* m_optionsPos;
+	SDL_Rect* m_creditsPos;
 	SDL_Rect* m_helpPos;
 	SDL_Rect* m_quitPos;
 };

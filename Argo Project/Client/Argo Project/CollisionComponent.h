@@ -34,6 +34,4 @@ public:
 private:
 	SDL_Rect m_collisionBounds;
 };
-
-
 #endif // !COLLISIONCOMPONENT_H

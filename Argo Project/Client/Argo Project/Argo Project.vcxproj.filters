@@ -30,9 +30,6 @@
     <ClCompile Include="Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="CreditsScreen.cpp">
       <Filter>Source Files\menus</Filter>
     </ClCompile>
@@ -43,12 +40,6 @@
       <Filter>Source Files\menus</Filter>
     </ClCompile>
     <ClCompile Include="MainMenuScene.cpp">
-      <Filter>Source Files\menus</Filter>
-    </ClCompile>
-    <ClCompile Include="MenuManager.cpp">
-      <Filter>Source Files\menus</Filter>
-    </ClCompile>
-    <ClCompile Include="OptionsScreen.cpp">
       <Filter>Source Files\menus</Filter>
     </ClCompile>
     <ClCompile Include="Play.cpp">
@@ -86,9 +77,6 @@
     <ClInclude Include="RenderSystem.h">
       <Filter>Header Files\ECS</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="CreditsScreen.h">
       <Filter>Header Files\Menus</Filter>
     </ClInclude>
@@ -104,13 +92,7 @@
     <ClInclude Include="MenuManager.h">
       <Filter>Header Files\Menus</Filter>
     </ClInclude>
-    <ClInclude Include="OptionsScreen.h">
-      <Filter>Header Files\Menus</Filter>
-    </ClInclude>
     <ClInclude Include="Play.h">
-      <Filter>Header Files\Menus</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene.h">
       <Filter>Header Files\Menus</Filter>
     </ClInclude>
     <ClInclude Include="SplashScreen.h">
@@ -138,9 +120,6 @@
       <Filter>Header Files\ECS</Filter>
     </ClInclude>
     <ClInclude Include="DecisionNodeSystem.h">
-      <Filter>Header Files\ECS</Filter>
-    </ClInclude>
-    <ClInclude Include="AIcomponent.h">
       <Filter>Header Files\ECS</Filter>
     </ClInclude>
     <ClInclude Include="AIJumpingSystem.h">

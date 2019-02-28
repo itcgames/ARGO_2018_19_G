@@ -14,12 +14,6 @@
 #include <iostream>
 #include <vector>
 
-//#include "ECS.h"
-//#include "Entity.h"
-
-//
-//class Entity;
-
 //
 class Component
 {

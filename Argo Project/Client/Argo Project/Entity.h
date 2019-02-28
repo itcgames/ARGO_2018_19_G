@@ -29,11 +29,6 @@ public:
 
 	}
 
-	~Entity()
-	{
-
-	}
-
 	//
 	template <class T>
 	T* getComponent(int type)

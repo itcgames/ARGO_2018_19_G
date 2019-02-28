@@ -30,14 +30,12 @@ public:
 
 			if (m_entities[i]->getComponent<PositionComponent>(1)->getPosition().x + m_entities[i]->getComponent<SpriteComponent>(2)->getRect()->w < 0)
 			{
-				//m_entities[i]->~Entity();
 				m_entities[i] = nullptr;
 				m_entities.erase(m_entities.begin() + i);
 				i--;
 			}
 		}
 	}
-	
 
 private:
 	float m_speed = 10;

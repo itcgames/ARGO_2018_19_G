@@ -1,7 +1,5 @@
 #include "SplashScreen.h"
 
-
-
 SplashScreen::SplashScreen(SDL_Renderer* renderer)
 {
 	initialise(renderer);
@@ -36,8 +34,6 @@ void SplashScreen::update(GameState* gameState)
 			*gameState = GameState::MainMenu;
 		}
 	}
-
-	std::cout << "updating splash" << std::endl;
 }
 
 void SplashScreen::render(SDL_Renderer *renderer)

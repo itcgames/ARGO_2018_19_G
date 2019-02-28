@@ -1,13 +1,24 @@
 #pragma once
 
 #include <SDL.h>
+#include <SDL_image.h>
+#include "MenuManager.h"
 class CreditsScreen
 {
 public:
-	CreditsScreen();
+	CreditsScreen(SDL_Renderer* renderer);
 	~CreditsScreen();
 
-	void update();
+	void initialise(SDL_Renderer* renderer);
+	void update(GameState* gameState);
 	void render(SDL_Renderer *renderer);
+
+private:
+	SDL_Point * mousePos;
+	SDL_Event m_event;
+	SDL_Texture* m_MainMenuButtonTxt;
+	SDL_Texture* m_backgroundTxt;
+	SDL_Rect* m_mainMenuButtonPos;
+	SDL_Rect* m_backgroundPos;
 };
 

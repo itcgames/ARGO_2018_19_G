@@ -31,12 +31,6 @@ public:
 	}
 
 	//
-	~PlatformComponent()
-	{
-
-	}
-
-	//
 	bool getIsActive()
 	{
 		return m_isActive;

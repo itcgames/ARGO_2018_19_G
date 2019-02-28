@@ -46,11 +46,6 @@ public:
 		}
 	}
 
-	~CoinComponent()
-	{
-
-	}
-
 	int getScore()
 	{
 		return m_score;
@@ -74,7 +69,6 @@ private:
 	bool m_isActive;
 	SDL_Texture * m_texture;
 	SDL_Rect * m_rect;
-
 };
 
 #endif // !COINCOMPONENT_H

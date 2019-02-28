@@ -16,13 +16,6 @@ public:
 	}
 
 	//
-	~AIJumpingSystem()
-	{
-
-	}
-
-
-	//
 	void update(float deltaTime)
 	{
 		for (int i = 0; i < m_entities.size(); i++)

@@ -131,14 +131,10 @@
     <ClCompile Include="LicenceScreen.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenuScene.cpp" />
-    <ClCompile Include="MenuManager.cpp" />
-    <ClCompile Include="OptionsScreen.cpp" />
     <ClCompile Include="Play.cpp" />
-    <ClCompile Include="Player.cpp" />
     <ClCompile Include="SplashScreen.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AIcomponent.h" />
     <ClInclude Include="AIJumpingSystem.h" />
     <ClInclude Include="BaseSystem.h" />
     <ClInclude Include="CoinComponent.h" />
@@ -157,13 +153,10 @@
     <ClInclude Include="MainMenuScene.h" />
     <ClInclude Include="MenuManager.h" />
     <ClInclude Include="NonPlayerMovementSystem.h" />
-    <ClInclude Include="OptionsScreen.h" />
     <ClInclude Include="PlatformComponent.h" />
     <ClInclude Include="Play.h" />
-    <ClInclude Include="Player.h" />
     <ClInclude Include="PositionComponent.h" />
     <ClInclude Include="RenderSystem.h" />
-    <ClInclude Include="Scene.h" />
     <ClInclude Include="SplashScreen.h" />
     <ClInclude Include="SpriteComponent.h" />
     <ClInclude Include="Vector2.h" />

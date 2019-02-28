@@ -26,7 +26,6 @@ public:
 		//
 		if (SDL_HasIntersection(player->getComponent<SpriteComponent>(2)->getRect(), object->getComponent<SpriteComponent>(2)->getRect()) == true)
 		{
-			//std::cout << "Collide" << std::endl;
 			collide = true;
 		}
 
@@ -50,27 +49,6 @@ public:
 	}
 
 	//
-	bool platformCollisionSide(Entity* player, Entity* object)
-	{
-		bool collide = false;
-		//
-		if ((player->getComponent<SpriteComponent>(2)->getRect()->x <= object->getComponent<SpriteComponent>(2)->getRect()->w ||
-			player->getComponent<SpriteComponent>(2)->getRect()->w >= object->getComponent<SpriteComponent>(2)->getRect()->x) &&
-			(player->getComponent<SpriteComponent>(2)->getRect()->y > object->getComponent<SpriteComponent>(2)->getRect()->y &&
-				player->getComponent<SpriteComponent>(2)->getRect()->y < object->getComponent<SpriteComponent>(2)->getRect()->h) ||
-				(player->getComponent<SpriteComponent>(2)->getRect()->h >= object->getComponent<SpriteComponent>(2)->getRect()->y &&
-					player->getComponent<SpriteComponent>(2)->getRect()->h < object->getComponent<SpriteComponent>(2)->getRect()->h))
-		{
-			collide = true;
-
-			std::cout << "Side Collision" << std::endl;
-		}
-
-		return collide;
-	}
-
-
-	//
 	bool platformCollisionTopBottom(Entity* player, Entity* object)
 	{
 		bool collide = false;
@@ -83,18 +61,9 @@ public:
 					player->getComponent<SpriteComponent>(2)->getRect()->w < object->getComponent<SpriteComponent>(2)->getRect()->w))
 		{
 			collide = true;
-
-			//std::cout << "Topbottom Collision" << std::endl;
 		}
 
 		return collide;
 	}
-
-	bool collision(Entity* player, Entity* object)
-	{
-
-	}
-
 };
-
 #endif // !COLLISIONSYSTEM_H

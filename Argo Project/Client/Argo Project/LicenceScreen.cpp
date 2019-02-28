@@ -1,7 +1,5 @@
 #include "LicenceScreen.h"
 
-
-
 LicenceScreen::LicenceScreen(SDL_Renderer* renderer)
 {
 	initialise(renderer);
@@ -36,7 +34,6 @@ void LicenceScreen::update(GameState *gameState)
 			*gameState = GameState::Splash;
 		}
 	}
-	std::cout << "updating licence" << std::endl;
 }
 
 void LicenceScreen::render(SDL_Renderer *renderer)
