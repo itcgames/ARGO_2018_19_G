@@ -34,7 +34,7 @@ public:
 		m_frames(frames),
 		m_speed(speed)
 	{
-
+		m_animationtype = AnimationType::Running;
 	}
 
 	//
@@ -53,6 +53,11 @@ public:
 		m_speed = speed;
 	}
 
+	void setAnimationType(AnimationType animationType)
+	{
+		m_animationtype = animationType;
+	}
+
 	//
 	bool getAnimated()
 	{
@@ -67,6 +72,11 @@ public:
 	int getSpeed()
 	{
 		return m_speed;
+	}
+
+	AnimationType getAnimationType()
+	{
+		return m_animationtype;
 	}
 
 private:

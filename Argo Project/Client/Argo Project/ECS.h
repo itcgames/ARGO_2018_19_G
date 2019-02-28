@@ -18,8 +18,11 @@
 #include "CoinComponent.h"
 #include "PlatformComponent.h"
 #include "CollisionComponent.h"
+#include "AnimationComponent.h"
 #include "RenderSystem.h"
 #include "JumpingSystem.h"
 #include "CollisionSystem.h"
 #include "NonPlayerMovementSystem.h"
+#include "AnimationSystem.h"
+
 #endif //! ECS_H

@@ -426,8 +426,10 @@ void PlayScreen::collisionsAndClearing()
 //
 void PlayScreen::scrollingBackground(float deltaTime)
 {
-	m_backgroundPos->x -= (m_scrollSpeed * deltaTime);
-	//m_backgroundPosTwo->x -= (m_scrollSpeed);
+	//
+	//m_backgroundPos->x -= m_scrollSpeed;
+	//
+	m_backgroundPosTwo->x -= m_scrollSpeed * deltaTime;
 
 	//
 	if (m_backgroundPos->x < -1920)

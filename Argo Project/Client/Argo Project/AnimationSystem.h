@@ -15,13 +15,19 @@
 
 #include "BaseSystem.h" 
 #include "Entity.h"
-#include "PositionComponent.h"
+#include "ECS.h"
 
 //
 class AnimationSystem :public BaseSystem
 {
 public:
+	void animationPlayer(Entity* player)
+	{
+		if (player->getComponent<AnimationComponent>(5)->getAnimated() == true)
+		{
 
+		}
+	}
 
 private:
 
